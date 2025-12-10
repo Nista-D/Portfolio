@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Projects - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="mua.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="../index.html" class="breadcrumb-link">
+                    <span class="breadcrumb-home">
+                            <i class="fas fa-home"></i> 
+                    </span>
+                </a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <a href="../projects.html" class="breadcrumb-link">Projects</a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-link current">Furniche</span>
+            </div>
+        </nav>
+
+        <div class="project-header">
+            <h1 class="project-title">Furniche – Premium Furniture Ecommerce Landing Page</h1>
+        </div>
+
+       <div class="image-wrapper">
+            <div class="image-container" onclick="openImageModal()">
+                <img src="../figma/assets/fur.png" alt="Furniche" />
+
+            </div>
+       </div>
+
+        <div class="image-modal" id="imageModal">
+            <span class="close-btn" onclick="closeImageModal()">&times;</span>
+
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⌂</button>
+            </div>
+            
+            <img src="../figma/assets/furniche.png" alt="Furniche Expanded" class="modal-image" id="modalImage" />
+            
+            <!-- <iframe class="modal-figma" id="modalFigma" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/lWnHLQRHX8T1VbuNxnccj1/Solemate?page-id=0%3A1&node-id=16-1258&viewport=-6651%2C-1839%2C1.48&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A119&embed-host=share" allowfullscreen></iframe> -->
+
+        </div>
+
+        <div class="project-overview">
+            <div class="project-brief">
+                <h3>Project Overview</h3>
+                <p class="project-description">Furniche was all about creating a premium, story-driven shopping journey for modern furniture. My focus was on making the page feel warm, premium, and personal using lifestyle imagery and storytelling elements that go beyond just selling products. Instead of just focusing on products, I wanted every section to highlight how thoughtful design can elevate everyday life.</p>
+                
+                <br>
+                <div class="highlight-section">
+                    <h4>Key Highlights</h4>
+                    <ul>
+                        <li>I kicked things off with a hero section that sets the tone - bold, modern, and paired with a clear call-to-action.</li>
+                        <li>The value highlights quickly build trust by showing tangible benefits like comfort, posture, and togetherness.</li>
+                        <li>The storytelling product sections like 'Spaces That Tell Stories' and 'Designed for Daily Rituals' position furniture as part of moments, not just objects.</li>
+                        <li>The testimonial section 'Stories From Real Homes', adds authenticity with real voices and experiences.</li>
+                        <li>The Furniche Promise reinforces credibility through values like credibility, sustainability, craftsmanship, and service.</li>
+                        <li>Finally, the footer ties everything together, closing the experience and provide next steps.</li>
+                    </ul>
+                </div>
+
+                <br><br>
+                <div class="highlight-section">
+                    <h4>Why I made this?</h4>
+                    <p class="project-description">I wanted to see if furniture could feel warm and premium without relying on beige or cliche tones. This project was about crafting comfort through layout, clean, balanced, and quietly confident.</p>
+                </div>
+
+                <br><br>
+                <button class="expand-button" onclick="toggleExpanded()">
+                    <span>Click to find more </span>
+                    <!-- <span class="arrow">↓</span> -->
+                     <span class="arrow">
+                        <i class="fa-etch fa-solid fa-arrow-down"></i>
+                    </span>
+                </button>
+
+                <div class="expandable-content" id="expandableContent">
+                    <div class="highlight-section">
+                        <h4>If This Were a Fuller Ecommerce Experience</h4>
+                        <p>If I continued building Furniche, I'd:</p>
+                        <ul>
+                            <li>Expand it into a fuller shopping experience by adding richer product pages with more imagery, material swatches, and configurators like color, fabric, size.</li>
+                            <li>Introduce personalization features like recommending furniture sets tailored to a user's lifestyle or aesthetic.</li>
+                            <li>Make the design fully responsive so mobile users get the same immersive browsing experience.</li>
+                            <li>Add micro-interactions and subtle animations to lift the premium feel, and focus on accessibility, load performance, and clear conversion flows like cart → checkout → confirmation. </li>
+                    </div>
+                    <br><br>
+
+                    <div class="highlight-section">
+                        <h4>Side Notes</h4>
+                        <p class="project-description">
+                            The design plays with calm whites, soft greys, and muted accents to echo a lifestyle brand mood. The goal wasn't just selling furniture, it was building a space that feels intentional, slow, and designed to breathe.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="dribbble-link">
+            <a href="https://dribbble.com/Lapcha" class="dribbble-btn">
+                🏀 View More on Dribbble
+            </a>
+        </div> -->
+
+        
+        <div class="related-projects">
+            <h2 class="section-title">More Figma Projects</h2>
+            
+            <div class="carousel-container">
+                <div class="projects-carousel" id="projectsCarousel">
+
+                    <!-- <div class="related-card" onclick="window.location.href='furniche.html'">
+                        <img src="../figma/assets/fur.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Furniche</h4>
+                            <p class="project-description">A Premium Furniture Ecommerce Landing Page</p>
+                        </div>
+                    </div> -->
+
+                    <div class="related-card" onclick="window.location.href='lakeside.html'">
+                        <img src="../figma/assets/lake.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Hotel Lakeside – Parentis-En-Born</h4>
+                            <p class="project-description">A Landing Page Redesign</p>
+                        </div>
+                    </div>
+
+                    <div class="related-card" onclick="window.location.href='solemate.html'">
+                        <img src="../figma/assets/sole.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Solemate</h4>
+                            <p class="project-description">Converse E-Commerce Landing Page</p>
+                        </div>
+                    </div>
+
+                    <div class="related-card" onclick="window.location.href='connect.html'">
+                        <img src="../figma/assets/connect.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Connect Dashboard</h4>
+                            <p class="project-description">Web Analytics Dashboard</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="related-card" onclick="window.location.href='artiers.html'">
+                        <img src="../figma/assets/artier.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Artiers</h4>
+                            <p class="project-description">Creative Agency Portfolio</p>
+                        </div>
+                    </div>
+
+                    <div class="related-card" onclick="window.location.href='frag.html'">
+                        <img src="../figma/assets/frag.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Frag</h4>
+                            <p class="project-description">Stardust Perfume Landing Paget</p>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+
+            <!-- <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="carousel-indicators" id="indicators"></div> -->
+
+        </div>
+
+    </div>
+
+    <!-- Mouse-shaped scroll to top button -->
+    <div class="mouse-scroll-button" onclick="scrollToTopMouse()" tabindex="0">
+        <div class="mouse-wheel"></div>
+        <div class="progress-fill"></div>
+        <div class="progress-text">0%</div>
+        <div class="tooltip">Scroll to top</div>
+    </div>
+    <div class="scroll-tag">scroll to top</div>
+
+
+    <script src="topper.js"></script>
+</body>
+
+</html>

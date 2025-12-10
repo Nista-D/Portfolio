@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+   
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            caret-color: transparent;
+        }
+
+        :root {
+            --background: #1a1a1a;
+            --foreground: #ffffff;
+            --card: #2c2c2c;
+            --card-foreground: #f5f5f5;
+            --primary: #00d4ff;
+            --primary-foreground: #1a1a1a;
+            --secondary: #fbbf24;
+            --secondary-foreground: #1a1a1a;
+            --muted-foreground: #cccccc;
+            --border: rgba(255, 255, 255, 0.1);
+            --radius: 0.5rem;
+             --card-bg: rgba(30, 30, 40, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #d1d1d1;
+            --border-radius: 16px;
+             --glass-blur: blur(14px);
+            --transition: all 0.3s ease;
+            --box-shadow: 0 0 24px rgba(180, 120, 255, 0.1), 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+         /* Breadcrumb Navigation */
+        .contain {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 50px;
+            z-index: 999;
+            width: 40px;
+            height: 40px;
+            left: 100px;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .breadcrumb-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .breadcrumb-link i {
+            font-size: 1rem;
+        }
+        
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+            text-shadow: 3px 3px 0 rgba(0, 212, 255, 0.25);
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            color: var(--muted-foreground);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .filter-btn {
+            background: rgba(44, 44, 44, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            color: var(--foreground);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            transform: scale(1.1) translateY(-2px);
+            background: rgba(44, 44, 44, 0.6);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .filter-btn.active {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(44, 44, 44, 0.5);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .sliding-dot {
+            position: absolute;
+            bottom: -12px;
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 0 8px var(--primary);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1); 
+                box-shadow: 0 0 8px var(--primary);
+            }
+            50% { 
+                transform: translateX(-50%) scale(1.3); 
+                box-shadow: 0 0 20px var(--primary);
+            }
+        }
+
+        .filter-count {
+            margin-left: 0.5rem;
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .projects-container {
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .projects-section {
+            width: 100%;
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            /* height: 400px; */
+        }
+
+        .projects-grid.uniform-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 460px;
+        }
+
+        .projects-grid.uniform-grid .project-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .projects-grid.uniform-grid .project-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .projects-grid.uniform-grid .project-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+        }
+
+        .projects-grid.uniform-grid .project-description {
+            flex: 1;
+            margin-bottom: 1rem;
+        }
+
+        .project-card {
+            background: rgba(44, 44, 44, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .project-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .project-card.bento-card {
+            border-radius: 1rem;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        }
+
+        .project-card.bento-card .bento-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .project-card.bento-card:hover .bento-image {
+            transform: scale(1.1);
+        }
+
+        .project-card.bento-card .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .project-card.bento-card:hover .project-overlay {
+            opacity: 1;
+            backdrop-filter: blur(12px);
+        }
+
+        .project-card.bento-card .project-name {
+            color: white;
+            font-size: clamp(1rem, 2.2vw, 1.8rem);
+            font-weight: 700;
+            text-align: center;
+            padding: 1.5rem;
+            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+            transform: translateY(40px) scale(0.8);
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .project-card.bento-card:hover .project-name {
+            transform: translateY(0) scale(1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+            transition: color 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .project-card:hover .project-title {
+            color: var(--secondary);
+        }
+
+        .project-description {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .project-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-tag {
+            background: rgba(251, 191, 36, 0.12);
+            color: var(--secondary);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            text-transform: capitalize;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--muted-foreground);
+        }
+
+        .empty-state p {
+            color: var(--muted-foreground);
+        }
+
+        .projects-section.transitioning {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+
+        .projects-section.fade-in {
+            animation: smoothFadeIn 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        }
+
+        @keyframes smoothFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .project-card.initial-load {
+            animation: slideInUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .filters {
+                gap: 0.5rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .projects-grid.uniform-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 350px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        
+
+        <div class="header">
+            <!-- Breadcrumb Navigation -->
+            <nav class="breadcrumb-nav">
+                <div class="breadcrumb-item">
+                    <a href="/" class="breadcrumb-link breadcrumb-home">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </nav>
+        
+            <h1>My Projects</h1>
+            <p>A collection of my design work spanning various tools and platforms. Each project represents a unique challenge and creative solution.</p>
+        </div>
+
+        <div class="filters" id="filters">
+            <button class="filter-btn active" data-filter="case-studies">
+                Case Studies <span class="filter-count">(2)</span>
+            </button>
+            <button class="filter-btn" data-filter="figma">
+               Figma <span class="filter-count">(4)</span>
+            </button>
+            <button class="filter-btn" data-filter="penpot">
+                Penpot <span class="filter-count">(2)</span>
+            </button>
+            <button class="filter-btn" data-filter="inkscape">
+                Inkscape <span class="filter-count">(4)</span>
+            </button>
+            <!-- <button class="filter-btn" data-filter="framer">
+                Framer <span class="filter-count">(2)</span>
+            </button>
+            <button class="filter-btn" data-filter="wordpress">
+                WordPress <span class="filter-count">(1)</span>
+            </button> -->
+        </div>
+
+        <div class="projects-container">
+            <div class="projects-section" id="projectsSection">
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Projects will be dynamically inserted here -->
+                </div>
+            </div>
+            
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="icon">🎨</div>
+                <h3>No projects found</h3>
+                <p>Try selecting a different filter to see more projects.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projects = [
+            {
+                id: "1",
+                title: "Onstream Movie App",
+                description: "A redesign of a modern day streaming service",
+                image: "./assets/pro/onstream.png",
+                tools: ["figma"],
+                category: "case-studies"
+            },
+            {
+                id: "2",
+                title: "Instagram",
+                description: "A recreation of Instagram",
+                image: "./assets/pro/insta.png",
+                tools: ["figma"],
+                category: "case-studies"
+            },
+            // {
+            //     id: "3",
+            //     title: "Wellifize",
+            //     description: "A slight tweak to a wellness site",
+            //     image: "./assets/pro/wellifize.png",
+            //     tools: ["penpot"],
+            //     category: "case-studies"
+            // },
+
+            {
+                id: "4",
+                title: "Furniche",
+                description: "Premium Furniture Ecommerce Landing Page",
+                image: "./figma/assets/fur.png",
+                tools: ["figma"],
+                category: "figma"
+            },
+            {
+                id: "5",
+                title: "Hotel Lakeside – Parentis-En-Born ",
+                description: "A Landing Page Redesign",
+                image: "./figma/assets/lake.png",
+                tools: ["figma"],
+                category: "figma"
+            },
+            {
+                id: "6",
+                title: "Solemate",
+                description: "Converse Ecommerce Landing Page",
+                image: "./figma/assets/sole.png",
+                tools: ["figma"],
+                category: "figma"
+            },
+            {
+                id: "7",
+                title: "Connect Analytics Dashboard",
+                description: "A Web Analytics Dashboard",
+                image: "./figma/assets/connect.png",
+                tools: ["figma"],
+                category: "figma"
+            },
+            // {
+            //     id: "8",
+            //     title: "Artiers",
+            //     description: "Creative Agency Portfolio",
+            //     image: "./figma/assets/artier.png",
+            //     tools: ["figma"],
+            //     category: "figma"
+            // },
+            // {
+            //     id: "9",
+            //     title: "Frag",
+            //     description: "Stardust Perfume Landing Page",
+            //     image: "./figma/assets/frag.png",
+            //     tools: ["figma"],
+            //     category: "figma"
+            // },
+
+            {
+                id: "9",
+                title: "Mirror.report",
+                description: "Landing Page Recreation",
+                image: "./penpot/assets/mirr.png",
+                tools: ["penpot"],
+                category: "penpot"
+            },
+            {
+                id: "10",
+                title: "Move to be More",
+                description: "Landing Page Recreation & Refinement",
+                image: "./penpot/assets/move.png",
+                tools: ["penpot"],
+                category: "penpot"
+            },
+            // {
+            //     id: "11",
+            //     title: "Dashboard Templates",
+            //     description: "Collection of responsive dashboard layouts",
+            //     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+            //     tools: ["penpot"],
+            //     category: "penpot"
+            // },
+            // {
+            //     id: "12",
+            //     title: "Collaborative Workspace",
+            //     description: "Team collaboration platform interface design",
+            //     image: "https://images.unsplash.com/photo-1522202176988-b95a79798f07?w=500&h=500&fit=crop",
+            //     tools: ["penpot"],
+            //     category: "penpot"
+            // },
+
+            {
+                id: "13",
+                title: "Creator Connect",
+                description: "Custom illustrations and scalable graphics",
+                image: "./inkscape/assets/creator_80.png",
+                tools: ["inkscape"],
+                category: "inkscape"
+            },
+            {
+                id: "14",
+                title: "Luxury Furniture",
+                description: "Various logo designs for different industries and clients",
+                image: "./inkscape/assets/furniture_100.png",
+                tools: ["inkscape"],
+                category: "inkscape"
+            },
+            {
+                id: "15",
+                title: "Forma Health",
+                description: "Business cards, brochures and marketing materials",
+                image: "./inkscape/assets/forma_100.png",
+                tools: ["inkscape"],
+                category: "inkscape"
+            },
+            {
+                id: "16",
+                title: "Restaurant Brochure",
+                description: "Collection of smooth animations and transitions",
+                image: "./inkscape/assets/brochure_100.png",
+                tools: ["inkscape"],
+                category: "inkscape"
+            },
+            // {
+            //     id: "16",
+            //     title: "Restaurant Landing",
+            //     description: "Animated portfolio with smooth micro-interactions",
+            //     image: "./inkscape/assets/restaurant_300.png",
+            //     tools: ["inkscape"],
+            //     category: "inkscape"
+            // },
+            // {
+            //     id: "18",
+            //     title: "Songs UI",
+            //     description: "Interactive prototypes and user experience demos",
+            //     image: "./inkscape/assets/player_100.png",
+            //     tools: ["inkscape"],
+            //     category: "inkscape"
+            // },
+
+            {
+                id: "19",
+                title: "Restaurant Website",
+                description: "Elegant website design for fine dining establishment",
+                image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop",
+                tools: ["framer"],
+                category: "framer"
+            },
+            {
+                id: "20",
+                title: "Corporate Blog",
+                description: "Professional blog platform for business communication",
+                image: "https://images.unsplash.com/photo-1486312338219-ce68e2c6b696?w=450&h=600&fit=crop",
+                tools: ["wordpress"],
+                category: "wordpress"
+            },
+            {
+                id: "21",
+                title: "Travel Blog Design",
+                description: "Adventure travel blog with stunning visual layouts",
+                image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=500&fit=crop",
+                tools: ["wordpress"],
+                category: "wordpress"
+            }
+        ];
+
+        let currentFilter = 'case-studies';
+        let isAnimating = false;
+
+        function createProjectCard(project, index, isInitial = false) {
+            const animationDelay = isInitial ? index * 100 : 0;
+            
+            return `
+                <div class="project-card ${isInitial ? 'initial-load' : ''}" 
+                     style="animation-delay: ${animationDelay}ms"
+                     data-project-id="${project.id}"
+                     onclick="navigateToProject('${project.id}')">
+                    <img src="${project.image}" alt="${project.title}" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-tools">
+                            ${project.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createBentoCard(project, index, isInitial = false) {
+            const animationDelay = isInitial ? index * 80 : index * 60;
+            
+            return `
+                <div class="project-card bento-card ${isInitial ? 'initial-load' : ''}" 
+                     style="animation-delay: ${animationDelay}ms"
+                     data-project-id="${project.id}"
+                     onclick="navigateToProject('${project.id}')">
+                    <img src="${project.image}" alt="${project.title}" class="bento-image">
+                    <div class="project-overlay">
+                        <div class="project-name">${project.title}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function navigateToProject(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+            
+            const projectPageMap = {
+                'Onstream Movie App': './case-studies/onstream/onstream.html',
+                'Instagram': './case-studies/insta/insta.html',
+                // 'Wellifize': './case-studies/wellifize/wellifize.html',
+                
+                'Furniche': './figma/furniche.html',
+                'Hotel Lakeside – Parentis-En-Born ': './figma/lakeside.html',
+                'Solemate': './figma/assets/solemate.html',
+                'Connect Analytics Dashboard': './figma/connect.html',
+                // 'Frag': './figma/frag.html',
+                
+                'Mirror.report': './penpot/mirror.html',
+                'Move to be More': './penpot/move.html',
+                // 'Dashboard Templates': 'dashboard-templates.html',
+                // 'Collaborative Workspace': 'workspace.html',
+                
+                'Creator Connect': './inkscape/creator.html',
+                'Luxury Furniture': './inkscape/furniture.html',
+                'Forma Health': './inkscape/forma.html',
+                'Restaurant Brochure': './inkscape/brochure.html',
+                // 'Restaurant Landing': './inkscape/glass.html',
+                // 'Songs UI': './inkscape/songs.html',
+                
+                // 'Restaurant Website': 'restaurant-website.html',
+                // 'Corporate Blog': 'corporate-blog.html',
+                // 'Travel Blog Design': 'travel-blog.html'
+            };
+            
+            const targetPage = projectPageMap[project.title];
+            
+            if (targetPage) {
+                window.location.href = targetPage;
+            }
+        }
+
+        async function filterProjects(filterId, clickedButton) {
+            if (filterId === currentFilter || isAnimating) return;
+
+            isAnimating = true;
+            const projectsSection = document.getElementById('projectsSection');
+            const projectsGrid = document.getElementById('projectsGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            let filtered = projects.filter(project => 
+                project.category === filterId
+            );
+
+            projectsSection.classList.add('transitioning');
+
+            setTimeout(() => {
+                if (filtered.length === 0) {
+                    projectsGrid.style.display = 'none';
+                    emptyState.style.display = 'block';
+                } else {
+                    if (filterId === 'case-studies') {
+                        projectsGrid.className = 'projects-grid';
+                        projectsGrid.innerHTML = filtered.map((project, index) => createProjectCard(project, index)).join('');
+                    } else {
+                        projectsGrid.className = 'projects-grid uniform-grid';
+                        projectsGrid.innerHTML = filtered.map((project, index) => createBentoCard(project, index)).join('');
+                    }
+                    
+                    projectsGrid.style.display = 'grid';
+                    emptyState.style.display = 'none';
+                }
+
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                clickedButton.classList.add('active');
+                
+                updateSlidingDot(clickedButton);
+                currentFilter = filterId;
+
+                requestAnimationFrame(() => {
+                    projectsSection.classList.remove('transitioning');
+                    projectsSection.classList.add('fade-in');
+                    
+                    setTimeout(() => {
+                        projectsSection.classList.remove('fade-in');
+                        isAnimating = false;
+                    }, 800);
+                });
+            }, 400);
+        }
+
+        function initializeSlidingDot() {
+            const filterButtons = document.querySelector('.filters');
+            const activeButton = document.querySelector('.filter-btn.active');
+            
+            const slidingDot = document.createElement('div');
+            slidingDot.className = 'sliding-dot';
+            filterButtons.appendChild(slidingDot);
+            
+            if (activeButton) {
+                updateSlidingDot(activeButton);
+            }
+        }
+
+        function updateSlidingDot(activeButton) {
+            const slidingDot = document.querySelector('.sliding-dot');
+            const filterButtons = document.querySelector('.filters');
+            
+            if (slidingDot && activeButton && filterButtons) {
+                const buttonRect = activeButton.getBoundingClientRect();
+                const containerRect = filterButtons.getBoundingClientRect();
+                
+                const leftPosition = buttonRect.left - containerRect.left + (buttonRect.width / 2) - 3;
+                
+                slidingDot.style.left = leftPosition + 'px';
+            }
+        }
+
+        window.addEventListener('resize', function() {
+            const activeButton = document.querySelector('.filter-btn.active');
+            if (activeButton) {
+                updateSlidingDot(activeButton);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            
+            const initialFiltered = projects.filter(project => 
+                project.category === 'case-studies'
+            );
+            
+            projectsGrid.className = 'projects-grid';
+            projectsGrid.innerHTML = initialFiltered.map((project, index) => createProjectCard(project, index, true)).join('');
+
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    filterProjects(this.dataset.filter, this);
+                });
+            });
+
+            initializeSlidingDot();
+        });
+    </script>
+</body>
+
+</html>

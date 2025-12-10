@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Projects - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="mua.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="../index.html" class="breadcrumb-link">
+                    <span class="breadcrumb-home">
+                            <i class="fas fa-home"></i> 
+                    </span>
+                </a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <a href="../projects.html" class="breadcrumb-link">Projects</a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-link current">Hotel Lakeside</span>
+            </div>
+        </nav>
+
+        <div class="project-header">
+            <h1 class="project-title">Hotel Lakeside – Parentis-En-Born Redesign</h1>
+        </div>
+
+       <div class="image-wrapper">
+            <div class="image-container" onclick="openImageModal()">
+                <img src="../figma/assets/lake.png" alt="Hotel" />
+
+            </div>
+       </div>
+
+        <div class="image-modal" id="imageModal">
+            <span class="close-btn" onclick="closeImageModal()">&times;</span>
+
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⌂</button>
+            </div>
+            
+            <img src="../figma/assets/lakeside.png" alt="Hotel Expanded" class="modal-image" id="modalImage" style=" width: 75%; max-width: 95%;" />
+            
+            <!-- <iframe class="modal-figma" id="modalFigma" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/lWnHLQRHX8T1VbuNxnccj1/Solemate?page-id=0%3A1&node-id=16-1258&viewport=-6651%2C-1839%2C1.48&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A119&embed-host=share" allowfullscreen></iframe> -->
+
+        </div>
+
+        <div class="project-overview">
+            <div class="project-brief">
+                <h3>Project Overview</h3>
+                <p class="project-description">This was a self-initiated redesign of The Originals Boutique, Hotel Lakeside website, one of those projects where I really wanted to take something functional but dated and give it life. The original site felt heavy and didn't quite capture how beautiful and serene the hotel actually is. My aim was to shift from an information-dense site to one that feels calm, curated, and luxurious at first glance, while still keeping that cozy boutique vibe while making the overall experience much more inviting and easy to browse.</p>
+                
+                <br>
+                <div class="highlight-section">
+                    <h4>Key Highlights</h4>
+                    <ul>
+                        <li>I kicked things off with a hero section that instantly sets a calm and welcoming tone, with clear booking and inquiry CTAs.</li>
+                        <li>Simplified navigationto guide users toward booking or exploring hospitality services immediately.</li>
+                        <li>Reorganized themed room, restaurant, lounge, rooftop bar content into modular sections, with better visual rhythm and improved scanability.</li>
+                        <li>Refined hierarchy and typography to make content breathable and easier to navigate.</li>
+                        <li>Added trust & promise elements to communicate quality, service, and authenticity like amenities, local cuisine, view, etc.</li>
+                    </ul>
+                </div>
+
+                <br><br>
+                <div class="highlight-section">
+                    <h4>Why I made this?</h4>
+                    <p class="project-description">I came across the original Lakeside Hotel website and saw potential; good brand, but outdated presentation. So I took it as a personal challenge to reimagine it with structure, depth, and better emotional flow.</p>
+                </div>
+
+                <br><br>
+                <button class="expand-button" onclick="toggleExpanded()">
+                    <span>Click to find more </span>
+                    <!-- <span class="arrow">↓</span> -->
+                     <span class="arrow">
+                        <i class="fa-etch fa-solid fa-arrow-down"></i>
+                    </span>
+                </button>
+
+                <div class="expandable-content" id="expandableContent">
+                    <div class="highlight-section">
+                        <h4>If This Were a Real Experience</h4>
+                        <p class="project-description">If I continued this project, I'd:</p>
+                        <ul>
+                            <li>Enhance the experience with richer room detail pages like more immersive imagery, what each theme room offers, hotel-prepared itinerary.</li>
+                            <li>Smoother transitions between sections, and visual storytelling in restaurant/lifestyle areas.</li>
+                            <li>Make it fully responsive for mobile-first users so the design feels as calm and refined on phones as on desktop.</li>
+                        </ul>
+                    </div>
+
+                    <br><br>
+                    <div class="highlight-section">
+                        <h4>What This Project Shows About Me</h4>
+                        <ul>
+                            <li>I can identify brand mismatch and redesign with emotional precision.</li>
+                            <li>I'm thoughtful about hospitality tone and visual storytelling.</li>
+                            <li>I balance calm minimalism with inviting warmth.</li>
+                            <li>I know how to elevate existing experiences without completely rebuilding them.</li>
+                        </ul>
+                    </div>
+
+                    <br><br>
+                    <div class="highlight-section">
+                        <h4>Side Note</h4>
+                        <p class="project-description">It's about calm storytelling, soft visuals, airy spacing, and effortless navigation. I wanted it to feel like a quiet getaway even before booking a room. The tone is classic, not flashy just confident enough to make you stay. </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="dribbble-link">
+            <a href="https://dribbble.com/Lapcha" class="dribbble-btn">
+                🏀 View More on Dribbble
+            </a>
+        </div> -->
+
+        
+        <div class="related-projects">
+            <h2 class="section-title">More Figma Projects</h2>
+            
+            <div class="carousel-container">
+                <div class="projects-carousel" id="projectsCarousel">
+
+                    <div class="related-card" onclick="window.location.href='furniche.html'">
+                        <img src="../figma/assets/fur.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Furniche</h4>
+                            <p class="project-description">A Premium Furniture Ecommerce Landing Page</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="related-card" onclick="window.location.href='lakeside.html'">
+                        <img src="../figma/assets/lake.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Hotel Lakeside – Parentis-En-Born</h4>
+                            <p class="project-description">A Landing Page Redesign</p>
+                        </div>
+                    </div> -->
+
+                    <div class="related-card" onclick="window.location.href='solemate.html'">
+                        <img src="../figma/assets/sole.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Solemate</h4>
+                            <p class="project-description">Converse E-Commerce Landing Page</p>
+                        </div>
+                    </div>
+
+                    <div class="related-card" onclick="window.location.href='connect.html'">
+                        <img src="../figma/assets/connect.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Connect Dashboard</h4>
+                            <p class="project-description">Web Analytics Dashboard</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="related-card" onclick="window.location.href='artiers.html'">
+                        <img src="../figma/assets/artier.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Artiers</h4>
+                            <p class="project-description">Creative Agency Portfolio</p>
+                        </div>
+                    </div>
+
+                    <div class="related-card" onclick="window.location.href='frag.html'">
+                        <img src="../figma/assets/frag.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Frag</h4>
+                            <p class="project-description">Stardust Perfume Landing Paget</p>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+
+            <!-- <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="carousel-indicators" id="indicators"></div> -->
+
+        </div>
+
+    </div>
+
+    <!-- Mouse-shaped scroll to top button -->
+    <div class="mouse-scroll-button" onclick="scrollToTopMouse()" tabindex="0">
+        <div class="mouse-wheel"></div>
+        <div class="progress-fill"></div>
+        <div class="progress-text">0%</div>
+        <div class="tooltip">Scroll to top</div>
+    </div>
+    <div class="scroll-tag">scroll to top</div>
+
+    <script src="topper.js"></script>
+
+</body>
+
+</html>

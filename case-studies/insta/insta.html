@@ -1,0 +1,1085 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instagram UI Replication</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #1a1a1a;
+      --surface-primary: rgba(30, 30, 40, 0.3);
+      --surface-secondary: rgba(30, 30, 40, 0.4);
+      --surface-tertiary: rgba(25, 25, 35, 0.5);
+      --card-elevated: rgba(35, 35, 45, 0.7);
+      --text-primary: #ffffff;
+      --text-secondary: #d1d1d1;
+      --text-muted: #b0b2c0;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-subtle: rgba(255, 255, 255, 0.05);
+      --border-strong: rgba(255, 255, 255, 0.15);
+      --border-radius: 16px;
+      --neon-purple: rgba(180, 120, 255, 0.14);
+      --neon-purple-strong: rgba(186, 130, 255, 0.3);
+      --topic: rgba(255, 255, 255, 0.6);
+      --neon-blue: rgba(120, 200, 255, 0.2);
+      --neon-green: rgba(150, 255, 150, 0.15);
+      --neon-orange: rgba(255, 150, 100, 0.12);
+      --neon-yellow: rgba(255, 255, 150, 0.12);
+      --title: linear-gradient(
+          135deg, /* diagonal like Instagram logo */
+          #405DE6 0%,   /* Royal Blue */
+          #833AB4 25%,  /* Purple */
+          #C13584 40%,  /* Dark Pink */
+          #E1306C 50%,  /* Purple-Red */
+          #FD1D1D 60%,  /* Red */
+          #F56040 70%,  /* Dark Orange */
+          #F77737 80%,  /* Orange */
+          #FCAF45 90%,  /* Yellow */
+          #FFDC80 100%  /* Light Yellow */
+        );
+      --glass-blur: blur(14px);
+      --transition: all 0.3s ease;
+      --box-shadow: 0 0 24px rgba(180, 120, 255, 0.1), 0 4px 30px rgba(0, 0, 0, 0.4);
+      --box-shadow-elevated: 0 0 32px rgba(180, 120, 255, 0.15), 0 8px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scrollbar-width: thin;
+      caret-color: transparent;
+  }
+
+
+  body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      font-size: 16px;
+      background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 150, 0.08), transparent 50%),
+          radial-gradient(circle at 80% 70%, var(--neon-purple), transparent 50%),
+          repeating-radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 1px, transparent 2px);
+      overflow-x: hidden;
+  }
+
+  /* Layout */
+  .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+  }
+
+  .contain {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+
+  /* Breadcrumb Navigation */
+  .breadcrumb-nav {
+      display: flex;
+      align-items: center;
+      /* justify-content: center; */
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      background: var(--surface-primary);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border);
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      width: 1200px;
+      max-width: 1400px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+
+  .breadcrumb-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      padding: 4px 8px;
+      border-radius: 6px;
+      position: relative;
+  }
+
+  .breadcrumb-link:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-1px);
+  }
+
+  .breadcrumb-link.current {
+      color: var(--text-primary);
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.08);
+      cursor: default;
+  }
+
+  .breadcrumb-separator {
+      color: var(--text-secondary);
+      opacity: 0.6;
+      font-size: 0.8rem;
+      margin: 0 0.25rem;
+  }
+
+  .breadcrumb-home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+  }
+
+  /* Hero Section - FIXED CENTERING */
+  .hero {
+      padding: 120px 0 80px ;
+      min-height: 50vh;
+      background: linear-gradient(180deg, rgba(194, 255, 120, 0.03), transparent 100%);
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      align-items: flex-start;
+      justify-content: center;
+  }
+
+  .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      /* background: linear-gradient(90deg, transparent, var(--border-subtle), transparent); */
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+
+  }
+
+  .hero .wrap {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 80px;
+      width: 1200px;
+      max-width: calc(100% - 80px);
+      padding: 0;
+      margin: 0 auto;
+  }
+
+  /* Project Meta */
+  .project-meta {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(40, 30, 50, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 8px 18px 8px 12px;
+    border-radius: 0 20px 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+    font-size: 0.8rem;
+    width: fit-content;
+    margin-left: 0;
+    margin-top: 100px;
+    /* top: 100px; */
+  }
+
+  .meta-item1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(40, 30, 50, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 8px 18px 8px 12px;
+    border-radius: 0 20px 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+    font-size: 0.8rem;
+    width: fit-content;
+    margin-left: 0;
+  }
+
+  .meta-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+    font-size: 0.75rem;
+  }
+
+  .meta-value {
+    font-weight: 600;
+    font-size: 0.8rem;
+    /* color: var(--title); */
+     background: var(--title);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+
+
+  .title {
+    /* font-size: clamp(32px, 4vw, 40px); */
+    font-size: 36px;
+    line-height: 1.1;
+    margin: 8px 0 10px;
+    background: var(--title);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(255, 244, 228, 0.1);
+  }
+
+  .subtitle {
+    color: var(--text-secondary);
+    max-width: 62ch;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+
+
+  /* Hero Card */
+  .hero-card {
+    background: var(--card-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: 60px;
+    box-shadow: var(--box-shadow-elevated);
+    padding: 0;
+    backdrop-filter: var(--glass-blur);
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-left {
+    margin-top: 40px;
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    opacity: 0.85;
+  }
+
+    /* Horizontal swipe */
+  .swipe-strip {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 15px 0 25px 0; /* Extra padding for scrollbar */
+    cursor: grab;
+    user-select: none;
+  }
+
+  .swipe-strip.dragging {
+    cursor: grabbing;
+  }
+
+  .swipe-strip::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .swipe-strip::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0 20px;
+  }
+
+  .swipe-strip::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    transition: background 0.2s ease;
+  }
+
+  .swipe-strip::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .swipe-strip::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .swipe-track {
+    display: inline-flex;
+    gap: 16px;
+    transition: transform 0.1s ease-out; /* Add this */
+  }
+
+  .swipe-track img {
+    height: 380px;
+    border-radius: 20px;
+    border: 0.5px solid rgb(255, 255, 255, 0.1);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* POPUP MODAL */
+  .img-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 99999;
+    padding-top: 20px;
+  }
+
+  .img-modal.active {
+    display: flex;
+  }
+
+  .img-modal img {
+    width: 300px;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 24px;
+    border: 0.5px solid rgb(255, 255, 255, 0.3);
+
+  }
+
+  /* Neon glow behind video */
+ 
+  .hero-right::before {
+    content: "";
+    position: absolute;
+    inset: -60px;
+    background: radial-gradient(
+        circle,
+        rgba(255, 150, 100, 0.22),
+        transparent 70%
+      );
+    filter: blur(65px);
+    z-index: -1;
+  }
+
+  /* Subtle Portfolio Link (below video) - ENHANCED */
+  .subtle-portfolio-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 10px 60px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Animated gradient border on hover */
+  .subtle-portfolio-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+      rgba(180, 120, 255, 0.4), 
+      rgba(120, 200, 255, 0.3),
+      rgba(180, 120, 255, 0.4)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  /* Glow effect */
+  .subtle-portfolio-link::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(
+      circle at center,
+      rgba(180, 120, 255, 0.15),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    filter: blur(20px);
+  }
+
+  .subtle-portfolio-link:hover {
+    color: var(--text-primary);
+    background: rgba(180, 120, 255, 0.08);
+    border-color: rgba(180, 120, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(180, 120, 255, 0.2);
+  }
+
+  .subtle-portfolio-link:hover::before {
+    opacity: 1;
+  }
+
+  .subtle-portfolio-link:hover::after {
+    opacity: 1;
+  }
+
+  .subtle-portfolio-link i {
+    font-size: 0.8rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.7;
+  }
+
+  .subtle-portfolio-link:hover i {
+    transform: translateX(5px);
+    opacity: 1;
+  }
+
+  .link-text {
+    position: relative;
+  }
+
+/* Center the link container */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+  /* Content Area */
+  .content {
+      padding: 18px 24px 60px;
+      max-width: 1250px; /* previously ~1100px area */
+
+  }
+
+  .grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 36px;
+  }
+
+  /* Table of Contents */
+  nav.toc {
+      position: sticky;
+      top: 80px;
+      align-self: start;
+      backdrop-filter: var(--glass-blur);
+      padding: 16px;
+      margin-left: -10px;
+  }
+
+  .toc a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: var(--transition);
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+  }
+
+  .toc a:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-subtle);
+  }
+
+  .toc a.active {
+      color: var(--text-primary);
+      background: rgba(186, 130, 255, 0.16);
+      border-color: #6e36b280;
+      box-shadow: 0 0 15px rgba(166, 93, 255, 0.3);
+  }
+
+  /* Sections */
+  section {
+      background: var(--surface-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 24px;
+      scroll-margin-top: 90px;
+      backdrop-filter: var(--glass-blur);
+      position: relative;
+  }
+
+  section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(180, 120, 255, 0.2), transparent);
+  }
+
+  section + section {
+      margin-top: 18px;
+  }
+
+  section:nth-child(even) {
+      background: var(--surface-tertiary);
+  }
+
+  section:nth-child(odd) {
+      background: var(--surface-secondary);
+  }
+
+  h2 {
+      /* margin: 0 0 12px;
+      font-size: 20px; */
+
+      font-size: 22px;        
+      margin-bottom: 18px;  
+      line-height: 1.5;
+      color: var(--text-primary);
+      background-clip: text;
+      text-shadow: 0 0 10px rgba(180, 120, 255, 0.3);
+  }
+
+  p {
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.75;
+      font-size: 16px;
+  }
+
+  ul {
+      color: var(--text-secondary);
+      padding-left: 24px;
+  }
+
+  li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+  }
+
+  strong {
+      color: #e9e9e9;
+  }
+
+  em {
+      color: var(--text-primary);
+      font-style: normal;
+      font-weight: 500;
+  }
+
+  /******** Closing NOte ********/
+  #conclusion {
+      background: linear-gradient(
+          180deg,
+          rgba(186, 130, 255, 0.10),
+          rgba(30, 30, 40, 0.35)
+      );
+      border: 0.5px solid rgba(186, 130, 255, 0.25);
+      border-radius: 20px;
+      padding: 32px 28px;
+      margin-top: 32px;
+      box-shadow: 0 0 22px rgba(186, 130, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+  }
+
+  #conclusion::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(158, 82, 251, 0.4),
+          transparent
+      );
+      opacity: 0.7;
+  }
+
+  #conclusion::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+          circle at 50% 0%,
+          rgba(68, 26, 119, 0.18),
+          transparent 70%
+      );
+      pointer-events: none;
+      z-index: -1;
+  }
+
+  #conclusion h2 {
+      font-size: 24px;
+      margin-bottom: 14px;
+      text-shadow: 0 0 18px rgba(186, 130, 255, 0.45);
+  }
+
+  #conclusion p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      /* max-width: 70ch; */
+  }
+
+
+
+  /* Animations */
+  @keyframes fadeInUp {
+      from {
+          opacity: 0;
+          transform: translateY(30px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+  .fade-in {
+      animation: fadeInUp 1s ease-out;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 980px) {
+      .hero .wrap {
+          flex-direction: column;
+          gap: 40px;
+      }
+
+      .hero-left {
+          max-width: 100%;
+      }
+
+      .hero-card {
+          width: 100%;
+          max-width: 500px;
+      }
+
+      .grid {
+          grid-template-columns: 1fr;
+      }
+
+      nav.toc {
+          position: relative;
+          top: 0;
+          margin-bottom: 20px;
+      }
+
+      .gallery {
+          grid-template-columns: repeat(2, 1fr);
+      }
+
+      .breadcrumb-nav {
+          width: calc(100% - 40px);
+          max-width: 1400px;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .hero {
+          padding: 100px 20px 40px;
+      }
+
+      .wrap {
+          padding: 16px;
+      }
+
+      .title {
+          font-size: 28px;
+      }
+
+      .subtitle {
+          font-size: 1rem;
+      }
+
+      .gallery {
+          grid-template-columns: 1fr;
+          padding: 12px;
+      }
+
+      section {
+          padding: 20px;
+      }
+
+      .breadcrumb-nav {
+          padding: 10px 16px;
+          font-size: 0.85rem;
+      }
+  }
+
+  @media (max-width: 640px) {
+      .breadcrumb-nav {
+          flex-wrap: wrap;
+          gap: 0.3rem;
+      }
+
+      .breadcrumb-separator {
+          margin: 0 0.1rem;
+      }
+  }
+
+  /* Print Styles */
+  @media print {
+      .breadcrumb-nav,
+      nav.toc {
+          display: none !important;
+      }
+
+      body {
+          background: #fff;
+          color: #000;
+      }
+
+      section {
+          break-inside: avoid;
+          box-shadow: none;
+          border: 1px solid #ccc;
+      }
+
+      .wrap {
+          max-width: 900px;
+      }
+  }
+
+  </style>
+
+</head>
+
+<body>
+
+ <!-- Breadcrumb Navigation -->
+  <div class="contain">
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      <div class="breadcrumb-item">
+        <a href="../../index.html" class="breadcrumb-link">
+          <span class="breadcrumb-home"><i class="fas fa-home"></i></span>
+        </a>
+      </div>
+      <span class="breadcrumb-separator">›</span>
+      <div class="breadcrumb-item">
+        <a href="../../projects.html" class="breadcrumb-link">Projects</a>
+      </div>
+      <span class="breadcrumb-separator">›</span>
+      <div class="breadcrumb-item">
+        <span class="breadcrumb-link current">Instagram</span>
+      </div>
+    </nav>
+  </div>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-left">
+        <div class="hero-tag">UI Craft Practice • Pixel Replication Study</div>
+        <h1 class="title">Instagram, Recreated for Craft Mastery</h1>
+
+        <div class="project-meta">
+              <div class="meta-item">
+                  <span class="meta-label">Tool</span>
+                  <span class="meta-value">Figma</span>
+              </div>
+              <div class="meta-item1">
+                  <span class="meta-label">Type</span>
+                  <span class="meta-value">UI Replication</span>
+              </div>
+        </div>
+
+        <p class="subtitle">
+          I didn't redesign Instagram. I set out to replicate it pixel-for-pixel where practical to test whether my visual craft, component thinking, and attention to detail could hold up against one of the most polished UIs out there. This was pure execution, not UX theory.
+        </p>
+
+        <div class="swipe-strip">
+          <div class="swipe-track">
+            <img src="../insta/img/home.png">
+            <img src="../insta/img/search.png">
+            <img src="../insta/img/upload.png">
+            <img src="../insta/img/reels.png">
+            <img src="../insta/img/profile.png">
+            <img src="../insta/img/story.png" alt="Story">
+            <img src="../insta/img/add-story.png" alt="Messages">
+            <img src="../insta/img/notifications.png" alt="Notifications">
+            <img src="../insta/img/message.png" alt="Messages">
+            <img src="../insta/img/no-requests.png" alt="Messages">
+            <img src="../insta/img/req-profile.png" alt="Messages">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- POPUP -->
+      <div id="imgModal" class="img-modal">
+        <img id="modalImage" />
+      </div>
+
+
+      <aside class="hero-right">
+        <div class="hero-card">
+          <video autoplay loop muted playsinline>
+            <source src="img/ig_main.mp4" type="video/mp4">
+          </video>
+        </div>
+        
+        <!-- HTML - Add this below the video card -->
+        <a href="https://embed.figma.com/proto/sqxmnAWBcohDO0eKaDJiow/Instagram?page-id=0%3A1&node-id=201-25&p=f&viewport=692%2C190%2C0.04&scaling=scale-down&content-scaling=fixed&starting-point-node-id=201%3A25&embed-host=share" class="subtle-portfolio-link" target="_blank" rel="noopener">
+          <span class="link-text">Explore live prototype</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </aside>
+
+    </div>
+  </section>
+
+
+  <!-- Main Content -->
+  <main class="content wrap">
+
+    <div class="grid">
+      <!-- Table of Contents -->
+      <nav class="toc" aria-label="On this page">
+        <a href="#why">Why Instagram?</a>
+        <a href="#scope">Scope & constraints</a>
+        <a href="#approach">What this project is</a>
+        <a href="#lessons">What I learnt</a>
+        <a href="#next">What I'd do next</a>
+      </nav>
+
+      <!-- Sections -->
+      <div>
+        <section id="why">
+          <h2>Why Instagram?</h2>
+
+          <p>If you've used Instagram (which… you definitely have), you know how clean and intentional it feels. Instead of trying to outdo it, I turned it into a benchmark to test myself against. The challenge was simple: Can I recreate a world-class interface with accuracy and consistency?
+            <br>I chose it because if I could get convincingly close to <em>THAT</em> quality bar, I'd trust my fundamentals anywhere else. As the saying goes, "A good designer can create anything, great designers master replication."</p>
+
+        </section>
+
+        <section id="scope">
+          <h2>Scope & Constraints</h2>
+
+          <ul class="cols-2">
+            <li><strong>Personal practice only.</strong> No testing, research, or live data. Focus: craft.</li>
+            <li><strong>Close visual parity.</strong> Typography rhythm, spacing system, icon sizes, and interaction timings.</li>
+            <li><strong>Free Figma tier realities.</strong> No team library publishing/branching, limited features, limited shared variables across files, and fewer prototype niceties. I worked around these by maintaining a single-file component page,and manual audits.</li>
+            <!-- <li><strong>Ethical.</strong> Yes I did <em>NOT</em> ship a clone. All outputs are legit and designed by me.</li> -->
+          </ul>
+
+        </section>
+
+        <section id="approach">
+          <h2>What This Project Actually Is</h2>
+          <ul>
+            <li>High-fidelity UI recreation</li>
+            <li>Pixel & spacing matching</li>
+            <li>Component-driven structure</li>
+            <li>Consistent styling across flows</li>
+          </ul>
+        </section>
+
+        <section id="lessons">
+          <h2>What I learnt</h2>
+          <ul>
+            <li><strong>Replication is a cheat code</strong> for leveling up craft. It forces you to see like the original designer.</li>
+            <li><strong>Systems over screens.</strong> Once design system and components were solid, screens came together fast.</li>
+            <li><strong>Details compound.</strong> One-pixel alignment errors feel bigger than they look; fix them early.</li>
+            <li><strong>Constraints =! excuses.</strong> Free-tier tooling pushed me to build a tighter system using limited features and manual QA checklists.</li>
+          </ul>
+        </section>
+
+        <section id="next">
+          <h2>What I'd do next</h2>
+          <ul>
+            <li>Recreate micro-interactions like burst, story ring progress, so on and so forth.</li>
+          </ul>
+        </section>
+
+      </div>
+      
+    </div>
+
+  </main>
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const modal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("modalImage");
+      const swipeStrip = document.querySelector(".swipe-strip");
+
+      // === BLOCK ALL MOUSEWHEEL ===
+      swipeStrip.addEventListener("wheel", (e) => {
+        e.preventDefault();
+      }, { passive: false });
+
+      // === SIMPLE DRAG TO SCROLL ===
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let hasDragged = false;
+
+      swipeStrip.addEventListener("mousedown", (e) => {
+        isDown = true;
+        hasDragged = false;
+        swipeStrip.classList.add("dragging");
+        startX = e.pageX - swipeStrip.offsetLeft;
+        scrollLeft = swipeStrip.scrollLeft;
+      });
+
+      swipeStrip.addEventListener("mouseleave", () => {
+        isDown = false;
+        swipeStrip.classList.remove("dragging");
+      });
+
+      swipeStrip.addEventListener("mouseup", () => {
+        isDown = false;
+        swipeStrip.classList.remove("dragging");
+      });
+
+      swipeStrip.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        
+        const x = e.pageX - swipeStrip.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        
+        if (Math.abs(walk) > 5) {
+          hasDragged = true;
+        }
+        
+        swipeStrip.scrollLeft = scrollLeft - walk;
+      });
+
+      // === IMAGE MODAL ===
+      let scrollPosition = 0;
+
+      document.querySelector(".swipe-track").addEventListener("click", (e) => {
+        if (e.target.tagName !== "IMG") return;
+        if (hasDragged) return;
+
+        scrollPosition = window.scrollY;
+        modalImg.src = e.target.src;
+        modal.classList.add("active");
+        
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        
+        const nav = document.querySelector(".breadcrumb-nav");
+        if (nav) nav.style.display = "none";
+      });
+
+      modal.addEventListener("click", () => {
+        modal.classList.remove("active");
+        modalImg.src = "";
+        
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        
+        window.scrollTo(0, scrollPosition);
+        
+        const nav = document.querySelector(".breadcrumb-nav");
+        if (nav) nav.style.display = "flex";
+      });
+
+      // === TOC ACTIVE STATE ===
+      const tocLinks = document.querySelectorAll('.toc a');
+      const sections = document.querySelectorAll('section[id]');
+
+      function setActiveLink() {
+        let currentSection = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          
+          if (window.scrollY >= (sectionTop - 150)) {
+            currentSection = section.getAttribute('id');
+          }
+        });
+        
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', setActiveLink);
+      setActiveLink();
+
+      tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          
+          if (targetSection) {
+            window.scrollTo({
+              top: targetSection.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+    });
+  </script>
+
+
+</body>
+
+</html>

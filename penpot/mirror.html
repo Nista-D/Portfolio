@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penpot Projects - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="mua.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="../index.html" class="breadcrumb-link">
+                    <span class="breadcrumb-home">
+                            <i class="fas fa-home"></i> 
+                    </span>
+                </a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <a href="../projects.html" class="breadcrumb-link">Projects</a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-link current">Mirror.report</span>
+            </div>
+        </nav>
+
+        <div class="project-header">
+            <h1 class="project-title">Mirror.report – Landing Page Recreation</h1>
+        </div>
+
+       <div class="image-wrapper">
+            <div class="image-container" onclick="openImageModal()">
+                <img src="../penpot/assets/mirr.png" alt="Mirror.report" />
+
+            </div>
+       </div>
+
+        <div class="image-modal" id="imageModal">
+            <span class="close-btn" onclick="closeImageModal()">&times;</span>
+
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⌂</button>
+            </div>
+            
+            <img src="../penpot/assets/mirror.png" alt="Fragrance Expanded" class="modal-image" id="modalImage" />
+            
+            <!-- <iframe class="modal-figma" id="modalPenpot" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/lWnHLQRHX8T1VbuNxnccj1/Solemate?page-id=0%3A1&node-id=16-1258&viewport=-6651%2C-1839%2C1.48&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A119&embed-host=share" allowfullscreen></iframe> -->
+
+        </div>
+
+        <div class="project-overview">
+            <div class="project-brief">
+                <h3>Project Overview</h3>
+                <p class="project-description">Mirror.report is a data-driven health platform that merges wearable and sensor data with coaching tools for clinicians, wellness coaches, and insurers. Their homepage features layered illustrations, animated UI components, and scroll-triggered storytelling, a design style that's clean, health-tech professional, yet very human.
+                    <br>I recreated the entire <a href="https://mirror.report/">Mirror.report</a> landing page inside Penpot, an open-source design tool. The challenge wasn't just to copy visuals, but to test how far I could translate a complex commercial interface into a more limited design environment – no animations, component auto-layout, or plugin support.</p>
+                
+                <br>
+                <div class="highlight-section">
+                    <h4>Why I made this?</h4>
+                    <p class="project-description">I wanted to see how far static tools can go when precision and structure are the only things you can rely on. Mirror.report's site is layered and motion-rich, not something Penpot is naturally built for.
+                        <br>So the challenge became: Could I still capture hierarchy, rhythm, and balance without the motion layer? This wasn't about rebranding or rethinking; it was a pixel-faithful recreation exercise matching typography, grid proportions, and visual narrative while manually building every element from scratch.</p>
+                </div>
+                
+                <br><br>
+                <div class="highlight-section">
+                    <h4>Replication & Interpretation</h4>
+                    <p class="project-description">This design started as a direct visual study of Mirror.report's landing page. I didn't aim to reinvent or brand-twist it, I aimed to mirror (pun intended) their real structure, with small adaptation choices only where Penpot required. The logo, palette, and typography follow their live brand. I retained layout hierarchy, section spacing, and visual rhythm. Where the original used parallax or motion emphasis, I balanced it with tonal contrast and shape layering instead. </p>
+                </div>
+
+                <br><br>
+                <button class="expand-button" onclick="toggleExpanded()">
+                    <span>Click to find more </span>
+                    <!-- <span class="arrow">↓</span> -->
+                     <span class="arrow">
+                        <i class="fa-etch fa-solid fa-arrow-down"></i>
+                    </span>
+                </button>
+
+                <div class="expandable-content" id="expandableContent">
+                    <div class="highlight-section">
+                        <h4>What I Learnt</h4>
+                        <ul>
+                            <li>Penpot's static nature forces you to understand alignment deeply. Everything has to feel right without motion cues.</li>
+                            <li>Recreating a polished product site makes you appreciate spacing consistency and typography scaling far more than in auto-layout tools.</li>
+                            <li>You notice how real landing pages rely on motion to imply depth and focus, and how to suggest those visually instead.</li>
+                        </ul>
+                    </div>
+
+                    <br><br>
+                    <div class="highlight-section">
+                        <h4>Side Note</h4>
+                        <p class="project-description">There's something refreshing about stripping a motion-heavy website down to static frames — it reveals how much of its polish actually comes from layout fundamentals. Penpot doesn't hand you grids or auto-alignment the way Penpot does, so every placement decision is deliberate. This project reminded me that great design starts with composition, not animation.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="dribbble-link">
+            <a href="https://dribbble.com/Lapcha" class="dribbble-btn">
+                🏀 View More on Dribbble
+            </a>
+        </div> -->
+
+             
+        <div class="related-projects">
+            <h2 class="section-title">More Penpot Projects</h2>
+            
+            <div class="carousel-container">
+                <div class="projects-carousel" id="projectsCarousel">
+
+                    <!-- <div class="related-card" onclick="window.location.href='mirror.html'">
+                        <img src="../penpot/assets/mirr.png" alt="Penpot Project">
+                        <div class="related-card-content">
+                            <h4>Mirror.report</h4>
+                            <p class="project-description">A Landing Page Recreation</p>
+                        </div>
+                    </div> -->
+
+                    <div class="related-card" onclick="window.location.href='move.html'">
+                        <img src="../penpot/assets/move.png" alt="Penpot Project">
+                        <div class="related-card-content">
+                            <h4>Move to be More</h4>
+                            <p class="project-description">Landing Page Recreation & Refinement</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="carousel-indicators" id="indicators"></div> -->
+
+        </div>
+
+    </div>
+
+    <!-- Mouse-shaped scroll to top button -->
+    <div class="mouse-scroll-button" onclick="scrollToTopMouse()" tabindex="0">
+        <div class="mouse-wheel"></div>
+        <div class="progress-fill"></div>
+        <div class="progress-text">0%</div>
+        <div class="tooltip">Scroll to top</div>
+    </div>
+    <div class="scroll-tag">scroll to top</div>
+
+    <script src="topper.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nids' Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="bento-grid">
+            <!-- Name Section - Standalone without bounding box -->
+            <div class="name-section">
+                <div class="animated-name" id="animatedName">NISTA DANGOL</div>
+            </div>
+
+            <!-- About Section - Expandable -->
+            <div class="bento-item about glass-effect neon-border neon-purple">
+                <div class="section-header">
+                    <div class="section-label">In case you're curious</div>
+                    <button class="expand-btn" id="expandAbout">
+                        <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                    </button>
+                </div>
+
+                <div class="section-content">
+                    <p> A simple love for drawing and creating could be a profession? Turns out there's actually a job for people who obsess over whether buttons should be 2px or 3px rounded. Lucky me! </p>
+                    <a href="#" class="resume-link" id="downloadResume">
+                        <i class="fa-solid fa-eye"></i> View Resume
+                    </a>
+                </div>
+
+                <!-- <div class="section-content">
+                    <p> A simple love for drawing and creating could be a profession? Turns out there's actually a job for people who obsess over whether buttons should be 2px or 3px rounded. Lucky me! </p>
+                    <a href="#" class="resume-link" id="downloadResume">
+                        <i class="fas fa-file-download"></i> Download Resume
+                    </a>
+                </div> -->
+
+            </div>
+
+            <!-- Contact Section with Integrated Social Media -->
+            <div class="bento-item contact glass-effect neon-border neon-blue">
+                <div class="section-label">Let's Chat</div>
+                <p class="email-display">nistdangol@gmail.com</p>
+                <button class="copy-email">
+                    <i class="far fa-copy"></i>
+                    Copy
+                </button>
+                
+                <p class="email-display">FIND ME ON</p>
+                <div class="social-grid">
+                    <a href="https://www.instagram.com/madewithcoffee.design/" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <!-- <a href="https://dribbble.com/Lapcha" target="_blank" class="social-icon">
+                        <i class="fa-brands fa-dribbble"></i>
+                    </a> -->
+                   
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="bento-item tools glass-effect neon-border neon-green">
+                <div class="section-label">Design arsenal</div>
+                <div class="tools-grid">
+                    <div class="tool">
+                        <img src="assets/figma.png" alt="Figma" class="tool-logo-fig">
+                        <span class="tool-name">Figma</span>
+                    </div>
+                    <div class="tool">
+                        <img src="assets/penpot.png" alt="Penpot" class="tool-logo-pen">
+                        <span class="tool-name">Penpot</span>
+                    </div>
+                    <div class="tool">
+                        <img src="assets/ink.png" alt="Inkscape" class="tool-logo-ink">
+                        <span class="tool-name">Inkscape</span>
+                    </div>
+                    <div class="tool">
+                        <img src="assets/html.png" alt="Html" class="tool-logo-ink">
+                        <span class="tool-name">HTML</span>
+                    </div>
+                    <div class="tool">
+                        <img src="assets/css.png" alt="CSS" class="tool-logo-figcss">
+                        <span class="tool-name">CSS</span>
+                    </div>
+                    <!-- <div class="tool">
+                        <img src="assets/framer.png" alt="Framer" class="tool-logo-frame">
+                        <span class="tool-name">Framer</span>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Mockups Carousel Section - Same size as Projects -->
+            <div class="bento-item mockups glass-effect neon-border neon-yellow">
+                <div class="mockups-carousel">
+                    <div class="mockup active">
+                        <div class="mockup-crop">
+                            <video src="assets/Mockup.mp4" playsinline autoplay muted loop preload="metadata"></video>
+                            <!-- <video src="https://youtube.com/shorts/gVYQn43iYCY?feature=share" playsinline autoplay muted loop preload="metadata"></video> -->
+
+                            <!-- <iframe 
+                                src="https://www.youtube.com/embed/gVYQn43iYCY?autoplay=1&mute=1&loop=1&playlist=gVYQn43iYCY" 
+                                frameborder="0" 
+                                allow="autoplay; encrypted-media" 
+                                allowfullscreen>
+                            </iframe> -->
+                            
+                        </div>   
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section - Links to projects page -->
+            <div class="bento-item projects-container glass-effect neon-border neon-pink">
+                <div class="section-header">
+                    <div class="section-label">Things I've Made</div>
+                    <a href="projects.html" class="view-all-btn">
+                         <button class="expand-btn" id="expandAbout">
+                            <img src="assets/puzzle-game.png" alt="Puzzle Icon" style="width:16px; height:16px; vertical-align: middle;">
+                        </button>
+                        <!-- <i class="fas fa-external-link-alt"></i> -->
+                    </a>
+                </div>
+
+
+                <div class="projects-carousel">
+                    <div class="projects-wrapper">
+                        <a href="case-studies/onstream/onstream.html" class="project">
+                            <img src="assets/pro/onstream.png" alt="Movie Streaming App">
+                            <div class="project-info">
+                                <h3>OnStream App</h3>
+                                <p>A Movie Streaming App Reimagined</p>
+                            </div>
+                        </a>
+
+                        <a href="case-studies/insta/insta.html" class="project">
+                            <img src="assets/pro/insta.png" alt="Movie Streaming App">
+                            <div class="project-info">
+                                <h3>Instagram</h3>
+                                <p>Instagram UI Replication</p>
+                            </div>
+                        </a>
+
+                        <a href="figma/lakeside.html" class="project">
+                            <img src="assets/pro/lakeside.png" alt="Hotel Booking Site">
+                            <div class="project-info">
+                                <h3>Hotel Lakeside – Parentis-En-Born </h3>
+                                <p>Luxury Hotel Landing Page Redesign</p>
+                            </div>
+                        </a>
+
+                        <!-- <a href="case-studies/wellifize/Wellifize.html" class="project">
+                            <img src="assets/pro/wellifize.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>Wellifize</h3>
+                                <p>Wellness Platform Replication</p>
+                            </div>
+                        </a>  -->
+
+                        <a href="figma/furniche.html" class="project">
+                            <img src="assets/pro/furniche.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>Furniche</h3>
+                                <p>Furniture Ecommerce Landing Page</p>
+                            </div>
+                        </a>
+
+                        <a href="figma/solemate.html" class="project">
+                            <img src="assets/pro/solemate.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>Solemate</h3>
+                                <p>E-commerce Landing Page for Converse Footwear</p>
+                            </div>
+                        </a>
+                       
+                        <a href="inkscape/creator.html" class="project">
+                            <img src="assets/pro/creator.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>Creator Connect</h3>
+                                <p>Artist Networking Platform</p>
+                            </div>
+                        </a>
+
+                        <a href="penpot/mirror.html" class="project">
+                            <img src="assets/pro/mirror.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>Mirror.report</h3>
+                                <p>A Landing Page Recreation</p>
+                            </div>
+                        </a>
+
+                        <a href="inkscape/brochure.html" class="project">
+                            <img src="assets/pro/brochure.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>Crimson Flame</h3>
+                                <p>Brand Identity & Digital Brochure</p>
+                            </div>
+                        </a>
+
+                        <a href="inkscape/forma.html" class="project">
+                            <img src="assets/pro/forma.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>Forma Health</h3>
+                                <p>Personalized Wellness Platform</p>
+                            </div>
+                        </a>
+
+                        <a href="inkscape/furniture.html" class="project">
+                            <img src="assets/pro/furniture.png" alt="Converse Shoes Site">
+                            <div class="project-info">
+                                <h3>The Timless Crafted Comfort</h3>
+                                <p>Armchair UI Concept</p>
+                            </div>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Expanded Section Overlay -->
+    <div class="expanded-overlay" id="expandedOverlay">
+        <div class="expanded-content" id="expandedContent">
+            <div class="expanded-header">
+                <h2 id="expandedTitle">Section Title</h2>
+                <button class="close-btn" id="closeExpanded">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="expanded-body" id="expandedBody">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

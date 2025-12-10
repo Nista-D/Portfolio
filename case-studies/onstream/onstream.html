@@ -1,0 +1,3699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnStream Reimagined - UX Case Study</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+   
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card-bg: rgba(30, 30, 40, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #d1d1d1;
+            --border: rgba(255, 255, 255, 0.1);
+            --border-radius: 16px;
+            --neon-purple: rgba(180, 120, 255, 0.14);
+            --neon-purple-strong: rgba(180, 120, 255, 0.3);
+            --topic: rgba(255, 255, 255, 0.6);
+            --neon-blue: rgba(120, 200, 255, 0.2);
+            --neon-green: rgba(150, 255, 150, 0.15);
+            --neon-orange: rgba(255, 150, 100, 0.12);
+            --neon-yellow: rgba(255, 255, 150, 0.12);
+            --title: rgb(220, 252, 53);
+            --glass-blur: blur(14px);
+            --transition: all 0.3s ease;
+            --box-shadow: 0 0 24px rgba(180, 120, 255, 0.1), 0 4px 30px rgba(0, 0, 0, 0.4);
+            /* --text-primary: #eaeaff;
+            --text-secondary: #b8b8e2; */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            caret-color: transparent;
+
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            font-size: 16px;
+            background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 150, 0.08), transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--neon-purple), transparent 50%),
+                repeating-radial-gradient(circle at center, rgba(255, 255, 255, 0.01) 1px, transparent 2px);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+       
+
+         /******* Project Context *******/
+        .context-container {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+        }
+
+        .context-narrative {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .context-narrative p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .context-narrative p:last-child {
+            margin-bottom: 0;
+        }
+
+        .context-intro strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .context-position strong {
+            /* color: var(--title);
+            font-style: normal;
+            font-weight: 500; */
+
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .context-approach strong {
+            /* color: var(--title);
+            font-weight: 600; */
+
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+       /* PDF Preview Wrapper */
+        .pdf-preview-wrapper {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 48px;
+            box-shadow: 0 0 40px rgba(180, 120, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+
+        .pdf-preview-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+
+        .pdf-content {
+            display: grid;
+            grid-template-columns: 0.4fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        /* PDF Cover Section */
+        .pdf-cover-section {
+            position: relative;
+        }
+
+        .pdf-cover-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(180, 120, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            background: #ffffff;
+            display: block;
+        }
+
+        .pdf-cover-container:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(180, 120, 255, 0.4);
+        }
+
+        .pdf-cover-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Hover Overlay */
+        .pdf-cover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* background: linear-gradient(135deg, rgba(233, 215, 255, 0.6), rgba(141, 209, 255, 0.9)); */
+            background: #1D1A31;
+            /* background: linear-gradient(135deg, var(--neon-purple-strong), rgba(120, 200, 255, 0.3)); */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pdf-cover-container:hover .pdf-cover-overlay {
+            opacity: 1;
+        }
+
+        .overlay-icon {
+            font-size: 2.6rem;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .overlay-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: whitesmoke;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* PDF Info Section */
+        .pdf-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .pdf-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* What's Inside */
+        .whats-inside {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .whats-inside h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .inside-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .inside-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .inside-list li::before {
+            content: '✓';
+            color: var(--title);
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .pdf-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .pdf-preview-wrapper {
+                padding: 32px 24px;
+            }
+
+            .pdf-cover-container {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pdf-preview-wrapper {
+                padding: 24px 16px;
+            }
+
+            .whats-inside {
+                padding: 20px;
+            }
+
+            .overlay-icon {
+                font-size: 3rem;
+            }
+
+            .overlay-text {
+                font-size: 1.1rem;
+            }
+        }
+
+
+
+        /* Breadcrumb Navigation */
+         .contain {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            /* min-height: 100px; */
+
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            justify-self: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border);
+            position: fixed;
+            top: 20px;
+            z-index: 999; 
+            width: 1400px;
+            /* left: 20px; */
+            /* margin-bottom: 2rem; */
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 4px 8px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .breadcrumb-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .breadcrumb-link.current {
+            color: var(--text-primary);
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.08);
+            cursor: default;
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-secondary);
+            opacity: 0.6;
+            font-size: 0.8rem;
+            margin: 0 0.25rem;
+        }
+
+        .breadcrumb-home {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        /* .breadcrumb-link:hover .breadcrumb-home {
+            transform: scale(1.1);
+        } */
+
+        
+        
+
+        /*------------------- Hero Section ------------------------*/
+       .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(180, 120, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(10, 10, 10, 0.8) 0%,
+                rgba(30, 20, 40, 0.7) 50%,
+                rgba(10, 10, 10, 0.9) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            z-index: 3;
+            padding: 60px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 183, 77, 0.3);
+            filter: drop-shadow(0 0 20px rgba(255, 183, 77, 0.2));
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            white-space: normal;
+            /* margin-left: auto;
+            margin-right: auto; */
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+        }
+
+        .hero .role {
+            font-size: 1.6rem;
+            color: var(--text-primary );
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Project Meta */
+        .project-meta {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(40, 30, 50, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 8px 18px 8px 12px;
+            border-radius: 0 20px 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: none;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+            font-size: 0.8rem;
+            width: fit-content;
+            margin-left: 0;
+            margin-top: 100px;
+            /* top: 100px; */
+
+        }
+
+        .meta-item1 {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(40, 30, 50, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 8px 18px 8px 12px;
+            border-radius: 0 20px 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: none;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+            font-size: 0.8rem;
+            width: fit-content;
+            margin-left: 0;
+        }
+
+        .meta-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+            font-size: 0.75rem;
+        }
+
+        .meta-value {
+            color: var(--title);
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+
+
+        /*---------------------- VISUAL DIRECTION SECTION STYLES  -----------------------*/
+
+#visual-direction {
+  padding: 80px 0;
+}
+
+.visual-direction-wrapper {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.visual-direction-text {
+  flex: 1 1 360px;
+  min-width: 300px;
+}
+
+.visual-direction-preview {
+  width: 320px;
+  flex: 0 0 320px;
+}
+
+.visual-preview img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* .section-title {
+  text-align: left;
+  margin-bottom: 10px;
+} */
+
+/* .section-subtitle {
+  text-align: left;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+} */
+
+.pdf-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 500;
+  text-decoration: underline;
+  color: var(--accent-color);
+  transition: opacity 0.2s ease;
+}
+
+.pdf-link:hover {
+  opacity: 0.8;
+}
+
+.visual-expectation {
+  margin-top: 10px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 800px) {
+  .visual-direction-wrapper {
+    flex-direction: column;
+  }
+  .visual-direction-preview {
+    width: 100%;
+  }
+}
+
+
+/*---------------------- Content Sections -----------------------*/
+        .content-section {
+            padding: 40px 0;
+            position: relative;
+        }
+
+         .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            text-shadow: 0 0 20px rgba(180, 120, 255, 0.3);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        /* Quick Stats */
+        .quick-stats {
+            position:absolute;
+            top: 70%;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 90;
+        }
+
+        .stat-card {
+            background: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 12px 16px 12px 20px;
+            border-radius: 20px 0 0 20px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: none;
+            box-shadow: -4px 2px 16px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transform: translateX(146px);
+        }
+
+        .stat-card:hover {
+            background: rgba(30, 30, 40, 0.95);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: -6px 4px 24px rgba(180, 120, 255, 0.15);
+            transform: translateX(0);
+        }
+
+        .stat-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .stat-card:nth-child(1) .stat-indicator {
+            background: rgba(219, 154, 249, 0.8);
+            box-shadow: 0 0 8px #b478ff80;
+        }
+
+        .stat-card:nth-child(2) .stat-indicator {
+            background: rgba(218, 242, 60, 0.8); 
+            box-shadow: 0 0 8px rgba(218, 242, 60, 0.5);
+        }
+
+        .stat-card:nth-child(3) .stat-indicator {
+            background: rgba(142, 216, 113, 0.8);
+            box-shadow: 0 0 8px rgba(142, 216, 113, 0.5);
+        }
+
+        .stat-card:nth-child(4) .stat-indicator {
+            background: rgba(255, 150, 100, 0.8);
+            box-shadow: 0 0 8px rgba(255, 150, 100, 0.5);
+        }
+
+        .stat-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .stat-number {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        /* Disclaimer Style */
+        .redesign-disclaimer {
+            margin: 40px 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .disclaimer-alert {
+            background: rgba(222, 255, 7, 0.03);
+            border: 1px dashed rgba(186, 214, 2, 0.3);
+            padding: 16px 20px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            /* color: rgba(255, 193, 7, 0.9); */
+            /* color: #DCFC35; */
+            text-align: center;
+            font-style: italic;
+            border-radius: 4px;
+        }
+
+        .disclaimer-label {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-style: normal;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .disclaimer-alert p{
+            color: var(--text-primary);
+            opacity: 0.7;
+
+        }
+
+        /* Overview */
+       
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .quick-stats {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                flex-direction: row;
+                justify-content: center;
+                margin: 30px 0 0 0;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .stat-card {
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                width: auto;
+                min-width: 140px;
+                padding: 10px 12px;
+                transform: none;
+            }
+
+            .stat-card:hover {
+                transform: translateY(-2px);
+            }
+
+            .stat-number {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.3rem;
+            }
+
+            .meta-item {
+                padding: 7px 14px 7px 10px;
+                font-size: 0.75rem;
+                border-radius: 0 0px 10px 0;
+            }
+
+            .meta-label {
+                font-size: 0.7rem;
+            }
+
+            .meta-value {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .quick-stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .stat-card {
+                min-width: 200px;
+                padding: 8px 12px;
+            }
+
+            .stat-number {
+                font-size: 0.85rem;
+            }
+
+            .meta-item {
+                padding: 6px 12px 6px 8px;
+                border-radius: 0 8px 8px 0;
+                gap: 4px;
+            }
+
+            .meta-label {
+                font-size: 0.65rem;
+            }
+
+            .meta-value {
+                font-size: 0.7rem;
+            }
+
+            .disclaimer-alert {
+                padding: 14px 16px;
+                font-size: 0.8rem;
+            }
+
+            .disclaimer-label {
+                font-size: 0.7rem;
+            }
+        }
+
+
+
+    /* Modal Styles */
+     .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--box-shadow);
+      padding: 32px;
+      max-width: 95vw;
+      width: 1200px;
+      max-height: 90vh;
+      overflow: hidden;
+      position: relative;
+      animation: slideIn 0.3s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--text-primary);
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      text-shadow: 0 0 4px rgba(180, 120, 255, 0.3);
+    }
+
+    .modal-scroll-container {
+      height: calc(90vh - 120px);
+      overflow-y: auto;
+      padding-right: 8px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .modal-scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Custom Scroll Track */
+    .scroll-track {
+      position: absolute;
+      right: 8px;
+      top: 80px;
+      bottom: 32px;
+      width: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      z-index: 5;
+    }
+
+    .scroll-thumb {
+      position: absolute;
+      right: 0;
+      width: 6px;
+      background: linear-gradient(180deg, var(--neon-purple-strong), rgba(120, 200, 255, 0.6));
+      border-radius: 3px;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px rgba(180, 120, 255, 0.4);
+      animation: scrollGlow 2s ease-in-out infinite alternate;
+    }
+
+    .scroll-thumb:hover {
+      background: linear-gradient(180deg, rgba(180, 120, 255, 0.8), rgba(120, 200, 255, 0.8));
+      box-shadow: 0 0 15px rgba(180, 120, 255, 0.6);
+      width: 8px;
+      right: -1px;
+    }
+
+    @keyframes scrollGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(180, 120, 255, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(180, 120, 255, 0.8), 0 0 30px rgba(120, 200, 255, 0.3);
+      }
+    }
+
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+    }
+
+    .component-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .component-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(180, 120, 255, 0.1);
+    }
+
+    .component-card h5 {
+      color: var(--text-primary);
+      font-size: 1rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .component-card p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { 
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Challenges */
+    /* Minimal Split Screen */
+        .challenges-split {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        /* Simple Navigation */
+        .split-nav {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 24px;
+        }
+
+        .nav-item {
+            padding: 16px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--neon-purple-strong), rgba(120, 200, 255, 0.2));
+            border-color: rgba(180, 120, 255, 0.3);
+        }
+
+        .nav-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .nav-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        .nav-item.active .nav-subtitle {
+            opacity: 1;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Clean Content */
+        .split-content {
+            padding: 40px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .content-item {
+            display: none;
+            width: 100%;
+        }
+
+        .content-item.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 32px;
+        }
+
+        /* Key Learning Box */
+        .key-learning {
+            background: rgba(213, 209, 138, 0.08);
+            border: 1px solid rgba(213, 209, 138, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 3px solid var(--title);
+        }
+
+        .learning-label {
+            font-size: 0.8rem;
+            color: var(--title);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .learning-text {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .challenges-split {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            
+            .split-nav {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                display: flex;
+                overflow-x: auto;
+                gap: 8px;
+                padding: 20px;
+            }
+            
+            .nav-item {
+                flex-shrink: 0;
+                min-width: 200px;
+                margin-bottom: 0;
+            }
+            
+            .split-content {
+                padding: 24px;
+            }
+            
+            .content-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-item {
+                min-width: 160px;
+                padding: 12px 16px;
+            }
+            
+            .nav-title {
+                font-size: 0.9rem;
+            }
+            
+            .nav-subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .content-title {
+                font-size: 1.3rem;
+            }
+            
+            .content-text {
+                font-size: 0.95rem;
+            }
+        }
+        
+
+        /* Key Learnings */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+
+        /* Tabbed Container */
+       
+
+        
+     /* Design Process Timeline */
+    .design-process-wrapper {
+      position: relative;
+      margin: 20px 0;
+      padding: 60px 0;
+      background: linear-gradient(
+        135deg,
+        rgba(180, 120, 255, 0.01),
+        rgba(255, 255, 150, 0.01) 50%,
+        rgba(120, 200, 255, 0.01) 100%
+      );
+      border-radius: 24px;
+      /* border: 1px solid rgba(255, 255, 255, 0.03); */
+      overflow: hidden;
+    }
+
+    .design-process-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.3;
+      z-index: 0;
+      animation: backgroundShift 20s ease-in-out infinite;
+    }
+    /* background: radial-gradient(circle at 25% 25%, var(--neon-blue), transparent 40%), radial-gradient(circle at 75% 75%, var(--neon-green), transparent 40%); */
+
+    @keyframes backgroundShift {
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 0.3;
+      }
+      33% {
+        transform: scale(1.1) rotate(1deg);
+        opacity: 0.4;
+      }
+      66% {
+        transform: scale(0.9) rotate(-1deg);
+        opacity: 0.2;
+      }
+    }
+
+    .design-steps {
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+      counter-reset: step-counter;
+    }
+
+    .design-steps::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--neon-purple-strong) 10%,
+        var(--neon-purple-strong) 90%,
+        transparent 100%
+      );
+      z-index: 1;
+    }
+
+    .design-step {
+      position: relative;
+      width: 45%;
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--box-shadow);
+      padding: 24px;
+      margin-bottom: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .design-step:nth-child(1) {
+      background: linear-gradient(135deg, rgba(120, 200, 255, 0.12), var(--card-bg));
+      border: 1px solid rgba(120, 200, 255, 0.12);
+      box-shadow: 0 0 24px rgba(120, 200, 255, 0.05), 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .design-step:nth-child(2) {
+        background: linear-gradient(135deg, rgba(218, 141, 58, 0.12), var(--card-bg));
+        border: 1px solid rgba(255, 180, 120, 0.12);
+        box-shadow: 0 0 24px rgba(255, 180, 120, 0.05), 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .design-step:nth-child(3) {
+        background: linear-gradient(135deg, rgba(255, 255, 120, 0.10), var(--card-bg));
+        border: 1px solid rgba(255, 255, 120, 0.12);
+        box-shadow: 0 0 24px rgba(255, 255, 120, 0.05), 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .design-step:nth-child(4) {
+      background: linear-gradient(135deg, rgba(120, 255, 120, 0.08), var(--card-bg));
+      border: 1px solid rgba(120, 255, 120, 0.12);
+      box-shadow: 0 0 24px rgba(120, 255, 120, 0.05), 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .design-step:nth-child(5) {
+      background: linear-gradient(135deg, rgba(255, 120, 194, 0.12), var(--card-bg));
+      border: 1px solid rgba(120, 200, 255, 0.12);
+      box-shadow: 0 0 24px rgba(120, 200, 255, 0.05), 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .design-step:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 40px rgba(180, 120, 255, 0.2);
+    }
+
+    .design-step:nth-child(1):hover {
+      box-shadow: 0 0 40px rgba(120, 255, 120, 0.15), 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .design-step:nth-child(2):hover {
+      box-shadow: 0 0 40px rgba(255, 180, 120, 0.15), 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .design-step:nth-child(3):hover {
+      box-shadow: 0 0 40px rgba(255, 255, 120, 0.15), 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .design-step:nth-child(4):hover {
+      box-shadow: 0 0 40px rgba(120, 200, 255, 0.15), 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .design-step:nth-child(odd) {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .design-step:nth-child(even) {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .design-step::before {
+      content: counter(step-counter);
+      counter-increment: step-counter;
+      position: absolute;
+      top: 30px;
+      width: 30px;
+      height: 30px;
+      background: var(--neon-purple-strong);
+      border: 2px solid var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: white;
+      z-index: 3;
+      box-shadow: 0 0 15px rgba(180, 120, 255, 0.5);
+    }
+
+    .design-step:nth-child(odd)::before {
+      right: -60px;
+    }
+
+    .design-step:nth-child(even)::before {
+      left: -60px;
+    }
+
+    .design-step::after {
+      content: "";
+      position: absolute;
+      top: 44px;
+      height: 2px;
+      background: var(--neon-purple-strong);
+      z-index: 2;
+    }
+
+    .design-step:nth-child(odd)::after {
+      right: -45px;
+      width: 45px;
+    }
+
+    .design-step:nth-child(even)::after {
+      left: -45px;
+      width: 45px;
+    }
+
+    .design-step h3 {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      font-weight: 600;
+      text-shadow: 0 0 4px rgba(180, 120, 255, 0.3);
+    }
+
+    .design-step p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .step-details {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .step-duration {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 8px;
+    }
+
+    .step-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tool-tag {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+
+    /* Strategic Solutions  */
+        .solutions-section {
+            padding: 40px 0;
+            position: relative;
+        }
+
+       
+        /* Navigation Controls */
+        .solutions-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            padding: 6px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-slider {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: linear-gradient(135deg, var(--neon-purple-strong), rgba(120, 200, 255, 0.3));
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(180, 120, 255, 0.3);
+        }
+
+        .nav-button {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 50px;
+            position: relative;
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        .nav-button.active {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-button:hover:not(.active) {
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Carousel Container */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--box-shadow);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 500%; /* 5 slides × 100% */
+        }
+
+        .case-slide {
+            width: 25%; /* Each slide takes 1/5 of track width */
+            flex-shrink: 0;
+            padding: 30px;
+            min-height: 600px;
+
+        }
+
+        .case-content {
+            width: 79.5%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .case-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .case-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: var(--title);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(180, 120, 255, 0.3);
+        }
+
+        .case-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Grid - NATURAL HEIGHT */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 26px; 
+            align-items: start;
+            flex: 1;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            display: flex;
+            flex-direction: column;
+            min-height: 400px; /* Set minimum height instead of 100% */
+        }
+
+        .section-solution{
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(120, 255, 150, 0.3);
+            display: flex;
+            flex-direction: column;
+            min-height: 400px; /* Set minimum height instead of 100% */
+        }
+        
+        .section h3 {
+            font-size: 1.2rem; /* Slightly reduced */
+            margin-bottom: 12px; /* Reduced from 16px */
+            font-weight: 600;
+        }
+
+        .section-solution h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .problem-title {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(255, 150, 100, 0.3);
+        }
+
+        .solution-title {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(120, 255, 150, 0.3);
+        }
+
+        .section-text {
+            /* height: 100px; */
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6rem;
+            margin-bottom: 16px;
+
+        }
+
+        .points {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        .points li {
+            color: var(--text-secondary);
+            padding: 6px 0; /* Reduced from 8px */
+            position: relative;
+            padding-left: 20px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        .problem-points li::before {
+            content: '⚠';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 150, 100, 0.8);
+            font-weight: bold;
+        }
+
+        .solution-points li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: rgba(120, 255, 150, 0.8);
+            font-weight: bold;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem; /* Reduced size */
+            color: var(--neon-purple-strong);
+            text-shadow: 0 0 15px rgba(180, 120, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* App Showcase - CONTROLLED SPACING */
+        .app-showcase {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .app-image {
+            /* background: rgba(255, 255, 255, 0.2); */
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .app-placeholder {
+            padding: 20px 12px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+        }
+
+        .app-placeholder img {
+            width: 350px;
+            height: auto;
+            max-width: 100%;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 8px;
+
+        }
+
+        .app-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .problem-showcase .app-image {
+            border-color: rgba(255, 150, 100, 0.2);
+        }
+
+        .solution-showcase .app-image {
+            border-color: rgba(120, 255, 150, 0.2);
+        }
+
+     
+
+        .impact {
+            background: linear-gradient(135deg, rgba(120, 255, 150, 0.1), rgba(120, 200, 255, 0.1));
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(120, 255, 150, 0.2);
+            margin-top: 12px;
+            text-align: center;
+            font-weight: 500;
+            color: rgba(120, 255, 150, 0.9);
+            font-size: 0.85rem;
+        }
+
+        /* Carousel Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 24px; /* Reduced from 30px */
+        }
+
+        .carousel-btn {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            width: 45px; /* Slightly smaller */
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(180, 120, 255, 0.2);
+            border-color: var(--neon-purple-strong);
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-indicator {
+            display: flex;
+            gap: 8px;
+        }
+
+        .indicator-dot {
+            width: 10px; /* Slightly smaller */
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: var(--neon-purple-strong);
+            box-shadow: 0 0 15px rgba(180, 120, 255, 0.5);
+            transform: scale(1.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .separator {
+                transform: rotate(90deg);
+                font-size: 1.2rem;
+                margin: 10px 0;
+            }
+
+            .case-slide {
+                padding: 20px;
+            }
+
+            .section, .section-solution {
+                min-height: auto; /* Remove min-height on mobile */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .solutions-nav {
+                flex-wrap: wrap;
+                padding: 4px;
+                border-radius: 20px;
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .nav-button {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+                margin: 2px;
+            }
+
+            .case-slide {
+                padding: 16px;
+            }
+
+            .case-title {
+                font-size: 1.5rem;
+            }
+
+            .case-description {
+                font-size: 0.9rem;
+            }
+
+            .section, .section-solution {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-controls {
+                gap: 15px;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+        }
+
+        /* Animation for slide transitions */
+        .case-slide {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-track.transitioning .case-slide:not(.active) {
+            opacity: 0.3;
+        }
+    
+
+        /* Challenges - Simple Layout */
+        .challenges-split {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .split-nav {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 32px 24px;
+        }
+
+        .nav-item {
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            background: var(--neon-purple-strong);
+            border-color: rgba(180, 120, 255, 0.5);
+        }
+
+        .nav-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .split-content {
+            padding: 32px;
+        }
+
+        .content-item {
+            display: none;
+        }
+
+        .content-item.active {
+            display: block;
+        }
+
+        .content-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .challenges-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .challenges-timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 60px);
+                margin-left: 40px !important;
+            }
+            
+            .timeline-item::before {
+                left: -58px !important;
+            }
+            
+            .challenges-masonry {
+                column-count: 1;
+            }
+            
+            .challenges-split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+       
+      
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--box-shadow);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive Design Updates */
+        @media (max-width: 768px) {
+            .process-timeline::before {
+                left: 20px;
+            }
+            
+            .process-number {
+                left: 20px;
+            }
+            
+            .process-card,
+            .process-card-right {
+                width: calc(100% - 80px);
+                margin-left: 60px;
+                margin-right: 0;
+            }
+            
+            .design-system-grid-new {
+                grid-template-columns: 1fr;
+            }
+            
+            .color-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Particle Animation Canvas */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Hero Learning Card */
+        .hero-learning {
+            /* background: linear-gradient(135deg, rgba(220, 252, 53, 0.12), rgba(180, 120, 255, 0.08));
+            border: 2px solid rgba(220, 252, 53, 0.3); */
+
+            background: linear-gradient(135deg, rgba(180, 120, 255, 0.12), rgba(220, 252, 53, 0.08));
+            border: 1px solid rgba(180, 120, 255, 0.4);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 48px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Subtle animated gradient overlay */
+        .hero-learning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 252, 53, 0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .hero-learning:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(220, 252, 53, 0.15), 0 8px 30px rgba(180, 120, 255, 0.1);
+            border-color: rgba(220, 252, 53, 0.5);
+        }
+
+        .hero-learning .insight-category {
+            font-size: 0.85rem;
+            color: var(--title);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            opacity: 1;
+            display: inline-block;
+        }
+
+        .hero-learning .insight-title {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            text-shadow: 0 0 30px rgba(220, 252, 53, 0.2);
+        }
+
+        .hero-learning .insight-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 480px) {
+        .hero-learning {
+            padding: 24px 20px;  /* Reduce padding */
+        }
+        
+        .hero-learning .insight-title {
+            font-size: 1.3rem;  /* Smaller on mobile */
+        }
+        
+        .hero-learning .insight-description {
+            font-size: 1rem;
+        }
+    }
+
+        /* Secondary Grid */
+        .secondary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .secondary-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secondary-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple-strong), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .secondary-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 40px rgba(180, 120, 255, 0.12);
+        }
+
+        .secondary-card:hover::after {
+            opacity: 1;
+        }
+
+        .secondary-card .insight-category {
+            font-size: 0.72rem;
+            color: var(--title);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            opacity: 0.85;
+        }
+
+        .secondary-card .insight-title {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .secondary-card .insight-description {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+
+        /* Final Reflection */
+        .final-reflection {
+            background: linear-gradient(135deg, rgba(220, 252, 53, 0.06), rgba(180, 120, 255, 0.04));
+            padding: 44px 52px;
+            border-radius: 20px;
+            border: 1px solid rgba(220, 252, 53, 0.15);
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            margin-top: 16px;
+        }
+
+        .reflection-text {
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            line-height: 1.75;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .highlight {
+            color: var(--title);
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .secondary-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+
+            .hero-learning {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 40px 16px;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-learning {
+                padding: 32px 28px;
+                margin-bottom: 40px;
+            }
+
+            .hero-learning .insight-title {
+                font-size: 1.6rem;
+            }
+
+            .hero-learning .insight-description {
+                font-size: 1.05rem;
+            }
+
+            .secondary-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .secondary-card {
+                padding: 24px;
+            }
+
+            .final-reflection {
+                padding: 32px 28px;
+            }
+
+            .reflection-text {
+                font-size: 1.05rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .hero-learning {
+                padding: 28px 24px;
+            }
+
+            .hero-learning .insight-category {
+                font-size: 0.75rem;
+            }
+
+            .hero-learning .insight-title {
+                font-size: 1.4rem;
+                margin-bottom: 16px;
+            }
+
+            .hero-learning .insight-description {
+                font-size: 1rem;
+            }
+
+            .secondary-card {
+                padding: 20px;
+            }
+
+            .secondary-card .insight-title {
+                font-size: 1.05rem;
+            }
+
+            .secondary-card .insight-description {
+                font-size: 0.9rem;
+            }
+
+            .final-reflection {
+                padding: 28px 24px;
+            }
+
+            .final-reflection::before {
+                font-size: 1.8rem;
+                top: -14px;
+            }
+
+            .reflection-text {
+                font-size: 1rem;
+            }
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <!-- Particle Animation Canvas -->
+    <!-- <canvas id="particleCanvas"></canvas> -->
+
+    <!-- Breadcrumb Navigation -->
+    <div class="contain">
+         <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="../../index.html" class="breadcrumb-link">
+                    <span class="breadcrumb-home">
+                            <i class="fas fa-home"></i> 
+                    </span>
+                </a>
+            </div>
+
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <a href="../../projects.html" class="breadcrumb-link">Projects</a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-link current">OnStream</span>
+            </div>
+        </nav>
+    </div>
+
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Hero Video Background -->
+        
+        <div class="hero-overlay">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <!-- Fallback for browsers that don't support video -->
+                <source src="re/onstream.mp4" type="video/mp4"> Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Project Meta - Positioned in hero top-left corner -->
+        <div class="project-meta">
+            <div class="meta-item">
+                <span class="meta-label">Tool</span>
+                <span class="meta-value meta-figma">Figma</span>
+            </div>
+            <div class="meta-item1">
+                <span class="meta-label">Type</span>
+                <span class="meta-value">Redesign</span>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <h1>OnStream Reimagined</h1>
+            <p class="subtitle">Personal redesign project where I wore both hats – A frustrated user and a solution-focused designer.</p>
+            <p class="role">THE CASE STUDY</p>
+        </div>
+
+         <!-- Quick Stats - Positioned on right edge, each card slides out individually on hover -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-indicator"></div>
+                <div class="stat-content">
+                    <span class="stat-number">6 Screens Redesigned</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-indicator"></div>
+                <div class="stat-content">
+                    <span class="stat-number">7 Week Timeline</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-indicator"></div>
+                <div class="stat-content">
+                    <span class="stat-number">100% Driven</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-indicator"></div>
+                <div class="stat-content">
+                    <span class="stat-number">∞ Coffee Consumed</span>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    
+    <div class="container">
+        <!-- Disclaimer -->
+        <div class="redesign-disclaimer">
+            <div class="disclaimer-alert">
+                <span class="disclaimer-label">Disclaimer</span>
+                    <p>
+                        This case study chronicles a strategic redesign born from my direct experience as a user of the OnStream app. Every friction point was a personal frustration, leading to highly empathetic and effective design solutions.
+                    </p>
+            </div>
+        </div>
+
+        <!-- Premise -->
+        <section class="content-section">
+            <h2 class="section-title">The Premise</h2>
+                    
+            <div class="context-container context-narrative">
+                <p class="context-intro">
+                    <strong>OnStream</strong> is a streaming platform offering movies and TV shows with HD quality across multiple devices. While the foundation was solid, the user experience was riddled with friction points.
+                </p>
+                        
+                <p class="context-position">
+                    As a frequent user myself, I didn't need much user research as <strong>I was the user.</strong> Every confusing flow, every redundant button, every missing piece of information was a personal frustration that became a design opportunity.
+                </p>
+                        
+                <p class="context-approach">
+                    My Philosophy: <strong>"Think like a surgeon, not a demolition expert"</strong>. Rather than completely restructuring the app, I focused on strategic improvements that enhance without overwhelming, preserving the app's character while eliminating friction.
+                </p>
+            </div>
+
+        </section>
+
+            
+        <!-- Design Process Timeline -->
+        <section class="content-section">
+            <h2 class="section-title fade-in">Design Process</h2>
+            <p class="section-subtitle fade-in">A design process grounded in lived experience</p>
+
+            <div class="design-process-wrapper">
+
+                <div class="design-steps">
+                    <div class="design-step">
+                        <h3>Research & Problem Discovery</h3>
+                        <p>I meticulously documented every moment of confusion, redundancy, and missing information during my daily app usage. This "self-dogfooding" provided unfiltered, authentic pain points.</p>
+                        
+                        <div class="step-details">
+                            <div class="step-duration">⏱️ Duration: 1 week</div>
+
+                            <div class="step-tools">
+                                <span class="tool-tag">Personal Usage</span>
+                                <span class="tool-tag">Pain-point Mapping</span>
+                                <span class="tool-tag">Flow Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="design-step">
+                        <h3>Ideation</h3>
+                        <p>Sketched multiple layout variations exploring improved navigation patterns and content discoverability. These explorations ran parallel to restructuring the information architecture.</p>
+                        <div class="step-details">
+                        <div class="step-duration">⏱️ Duration: 2 weeks</div>
+                        <div class="step-tools">
+                            <span class="tool-tag">Sketching</span>
+                            <span class="tool-tag">User Flow Mapping</span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="design-step">
+                        <h3>Information Architecture & Content Strategy</h3>
+                        <p>Performed "IA surgery," strategically consolidating content and removing redundant sections while preserving all functionality. This involved a deep content audit and re-mapping of user flows based on my own intuitive needs.</p>
+                        <div class="step-details">
+                        <div class="step-duration">⏱️ Duration: 2 weeks</div>
+                        <div class="step-tools">
+                            <span class="tool-tag">Content Audit</span>
+                            <span class="tool-tag">Content Strategy</span>
+                            <span class="tool-tag">IA Restructuring</span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="design-step">
+                        <h3>Design System & Components</h3>
+                        <p>Established a cohesive design language with consistent typography, color palette, and reusable components that would scale across all screens.</p>
+                        <div class="step-details">
+                        <div class="step-duration">⏱️ Duration: 1-2 weeks</div>
+                        <div class="step-tools">
+                            <span class="tool-tag">Typography</span>
+                            <span class="tool-tag">Colour System</span>
+                            <span class="tool-tag">Component Library</span>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="design-step">
+                        <h3>High-Fidelity Design & Prototyping</h3>
+                        <p>Applied the design system to create polished interfaces with smooth interactions. Built interactive prototypes to demonstrate the enhanced user experience. Each design decision was immediately "tested" by my own usage, allowing for rapid, iterative improvements.</p>
+                        <div class="step-details">
+                        <div class="step-duration">⏱️ Duration: 3-4 weeks</div>
+                        <div class="step-tools">
+                            <span class="tool-tag">Figma</span>
+                            <span class="tool-tag">Design System</span>
+                            <span class="tool-tag">Prototyping</span>
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+          
+
+        <!-- Visual Direction Section -->
+        <section class="content-section" id="visual-direction">
+            <h2 class="section-title fade-in">Visual Direction</h2>
+            <p class="section-subtitle fade-in">
+                A comprehensive design system document covering color palette, typography hierarchy, and 
+                component library, that shaped OnStream's reimagined experience.
+            </p>
+            
+            <div class="pdf-preview-wrapper fade-in">
+                <div class="pdf-content">
+                    
+                    <!-- PDF Cover Image -->
+                    <div class="pdf-cover-section">
+                        <a href="Design System.pdf" target="_blank" class="pdf-cover-container">
+                            <img src="og/pdf_cover.png" alt="OnStream Visual Direction PDF Cover" class="pdf-cover-image">
+                            
+                            <!-- Hover Overlay -->
+                            <div class="pdf-cover-overlay">
+                                <div class="overlay-icon">👁️</div>
+                                <div class="overlay-text">Click to View PDF</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- PDF Information -->
+                    <div class="pdf-info-section">
+                        <div>
+                            <p class="pdf-description">
+                                This guide preserves OnStream's original color identity while introducing strategic typography improvements and a scalable component system to ensure consistency across all redesigned screens.
+                            </p>
+                        </div>
+
+                        <!-- What's Inside -->
+                        <div class="whats-inside">
+                            <h4>What's Inside</h4>
+                            <ul class="inside-list">
+                                <li>Color system with semantic naming, hex code, and usage guidelines</li>
+                                <li>Typography scale with usage and design rationale</li>
+                                <li>Sneak-peek into component library with variants</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Strategic Solutions -->
+        <section class="content-section">
+            <h2 class="section-title fade-in">Strategic Solutions</h2>
+            <p class="section-subtitle fade-in">
+                Design decisions driven by real user frustrations and tested through personal use
+            </p>
+           
+             <div class="solutions-nav">
+                <div class="nav-slider"></div>
+                <button class="nav-button active" data-slide="0">Redundancy Maze</button>
+                <button class="nav-button" data-slide="1">Navigation Chaos</button>
+                <button class="nav-button" data-slide="2">Completion Status</button>
+                <button class="nav-button" data-slide="3">Movie Detail</button>
+                <button class="nav-button" data-slide="4">Series Detail</button>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    
+                    <!-- Case 1: Authentication Maze -->
+                    <div class="case-slide">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h2 class="case-title">Authentication Maze</h2>
+                                <p class="case-description">First impressions matter. The original onboarding was a masterclass in how NOT to welcome users - confusing CTAs created immediate friction. Critical authentication flows suffered from redundancy.</p>
+                            </div>
+
+                            <div class="content-grid">
+                                <div class="section">
+                                    <h3 class="problem-title">The Problem</h3>
+                                    <p class="section-text">
+                                        I repeatedly encountered navigation paths that led to identical destinations. For instance, both "Continue with email" and "Continue with Google" funneled to the same login screen, causing unnecessary decision fatigue.
+                                    </p>
+
+                                    <div class="app-showcase problem-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="og/onboard.jpg" alt="initiate screen">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="app-description">
+                                            Both "Continue with email" and "Continue with Google" led to same destination, creating a redundancy trap.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="separator">→</div>
+
+                                <div class="section-solution">
+                                    <h3 class="solution-title">The Solution</h3>
+                                    <p class="section-text">
+                                        Replaced the redundant "Continue with..." buttons with a direct "Create Account" path, including a clear toggle for existing users to log in. <p style="color: rgba(120, 200, 255, 0.01);">abcdefghijklmnopqrstuvwxyz</p>
+                                    </p>
+
+                                    <div class="app-showcase solution-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="re/INITIATE.png" alt="initiate screen">
+
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            Enhanced overlay visibility, centered content for focus, direct "Create Account" button led directly to registration, prominent skip button.
+                                        </div>
+                                    </div>
+
+                                    <div class="impact">
+                                        Eliminated unnecessary steps and user confusion
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <!-- Case 2: Navigation Chaos -->
+                    <div class="case-slide">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h2 class="case-title">Home Screen Chaos</h2>
+                                <p class="case-description">The main hub was a navigation nightmare - 5 tabs with redundant paths, and duplicate content options.</p>
+                            </div>
+
+                            <div class="content-grid">
+                                <div class="section">
+                                    <h3 class="problem-title">The Problem</h3>
+                                    
+                                    <p class="section-text">
+                                        The 5-item bottom navigation was overcrowded, with a redundant "More" tab leading to the same Profile page. Duplicate content sections (e.g., "trending" and "popular" carousels) further cluttered the interface and wasted my time.
+                                    </p>
+
+                                    <ul class="points problem-points">
+                                        <li>5-item bottom tab navigation</li>
+                                        <li>"More" tab led to same Profile destination</li>
+                                        <li>Duplicate content sections 'Trending' and 'Popular' created confusion</li>
+                                    </ul>
+
+                                    <div class="app-showcase problem-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="og/home.jpg" alt="home screen">
+
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            5-tab bottom navigation where "profile" and "more" led to the same page. Carousel had "trending" and "popular" options that duplicated hero section choices. Pure redundancy chaos!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="separator">→</div>
+
+                                <div class="section-solution">
+                                    <h3 class="solution-title">The Solution</h3>
+                                    
+                                    <p class="section-text">
+                                        Removed the redundant 'More' tab and streamlined navigation to create clear, single-purpose pathways. Each navigation element now has a distinct function and destination.
+
+                                    </p>
+
+                                    <ul class="points solution-points">
+                                        <li>Reduced to 4 essential navigation items</li>
+                                        <li>Eliminated redundant "More" tab completely</li>
+                                        <li>Eliminated duplicate carousel options</li>
+                                        
+                                    </ul>
+
+                                    <div class="app-showcase solution-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="re/HOME.png" alt="home screen">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            Floating bottom nav with 4 essential items (home, movie, series, watchlist). Removed duplicate 'trending' and 'popular' options. 
+                                        </div>
+                                    </div>
+
+                                    <div class="impact">
+                                        Improved navigation clarity and reduced cognitive load by removing unnecessary options.
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 3: Completion Status -->
+                    <div class="case-slide">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h2 class="case-title">Completion Status</h2>
+                                <p class="case-description">Critical information, such as a series' completion status was not available in the original app. As an entertainment enthusiast, I often encountered series with no clear distinction of their completion status, leading to frustrating waits for episodes that might never come. </p>
+                            </div>
+
+                            <div class="content-grid">
+                                <div class="section">
+                                    <h3 class="problem-title">The Problem</h3>
+                                    
+                                    <p class="section-text">
+                                        Critical information, such as a series' completion status was consistently missing. This forced me to make uninformed viewing decisions, leading to frustration with abandoned series.
+                                    </p>
+
+                                    <div class="app-showcase problem-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="og/completion.jpg" alt="completion status">
+
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            Missing essential data like series completion status for informed viewing decisions.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="separator">→</div>
+
+                                <div class="section-solution">
+                                    <h3 class="solution-title">The Solution</h3>
+                                    
+                                    <p class="section-text">
+                                        Added crucial information like "ongoing" or "completed" status for TV series directly on the home screen. This empowers users to make informed viewing decisions at a glance.
+
+                                    </p>
+
+
+                                    <div class="app-showcase solution-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="re/SERIES.png" alt="completion status">
+
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            Added ongoing/completed status for TV series - context users actually need!
+                                        </div>
+                                    </div>
+
+                                    <div class="impact">
+                                        Eliminated frustration by providing essential context, preventing users from starting incomplete series unintentionally.
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 4:  Movie Information Hierarchy -->
+                    <div class="case-slide">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h2 class="case-title">Movie Mafia</h2>
+                                <p class="case-description">When users click on a movie, they're in research mode. They want to know if it's worth their time. Scattered information across multiple tabs creates unnecessary friction between curiosity and commitment.</p>
+                            </div>
+
+                            <div class="content-grid">
+                                <div class="section">
+                                    <h3 class="problem-title">The Problem</h3>
+                                    
+                                    <p class="section-text">
+                                        Critical information like release year and country of origin was completely missing, while redundant cast sections created visual clutter without adding value.
+                                    </p>
+
+                                    <ul class="points problem-points">
+                                        <li>Missing release context and origin data</li>
+                                        <li>No country information</li>
+                                        <li>Duplicate cast sections across screens</li>
+                                        
+                                    </ul>
+
+                                    <div class="app-showcase problem-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="og/movie.jpg" alt="movie screen">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            Missing essential metadata, redundant information sections, poor content organization, and uninformed user decisions.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="separator">→</div>
+
+                                <div class="section-solution">
+                                    <h3 class="solution-title">The Solution</h3>
+                                    
+                                    <p class="section-text">
+                                        Redesigned information architecture to consolidate redundant sections while surfacing essential metadata that enables quick, informed viewing decisions.
+                                    </p>
+
+                                    <ul class="points solution-points">
+                                        <li>Integrated cast information into main overview</li>
+                                        <li>Added release year and country of origin</li>
+                                        <li>Eliminated redundant content sections</li>
+                                    </ul>
+
+                                    <div class="app-showcase solution-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="re/tarot.png" alt="movie screen">
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            Complete essential metadata, consolidated information design, improved content hierarchy, and faster decision-making.
+                                        </div>
+                                    </div>
+
+                                    <div class="impact">
+                                        Faster content evaluation and selection process
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 4: Series Information Hierarchy -->
+                    <div class="case-slide">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h2 class="case-title">Series Page</h2>
+                                <p class="case-description">Series pages are more complex than movies. Users need episode access, series context, and related recommendations, that help users make informed viewing decisions.</p>
+                            </div>
+
+                            <div class="content-grid">
+                                <div class="section">
+                                    <h3 class="problem-title">The Problem</h3>
+                                    
+                                    <p class="section-text">
+                                        Same as Movie information, critical information was buried while redundant details cluttered the interface. Cast information appeared in multiple places, and important context like release year and country was missing.
+                                    </p>
+
+                                    <ul class="points problem-points">
+                                        <li>Missing release context and origin data</li>
+                                        <li>No country information</li>
+                                        <li>Duplicate cast sections across screens</li>
+                                        <li>Unnecessary redundant "episode list" button for series</li>
+                                       
+                                    </ul>
+
+                                    <div class="app-showcase problem-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="og/series.jpg" alt="series screen">
+
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                             Separate "casts" section when cast information was already present in overview. Missing release year and country left users without important contextual information for content discovery.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="separator">→</div>
+
+                                <div class="section-solution">
+                                    <h3 class="solution-title">The Solution</h3>
+                                    
+                                    <p class="section-text">
+                                        Restructured information hierarchy to eliminate redundancy. Removed duplicate cast sections and episode lists where information was already available. Added valuable context while maintaining clean visual design.
+                                    </p>
+
+                                    <ul class="points solution-points">
+                                        <li>Integrated cast info in overview</li>
+                                        <li>Added release year for temporal context</li>
+                                        <li>Included country for global awareness</li>
+                                        <li>Removed redundant episode list button</li>
+                                    </ul>
+
+                                    <div class="app-showcase solution-showcase">
+                                        <div class="app-image">
+                                            <div class="app-placeholder">
+                                                <img src="re/one-of-us-is-lying.png" alt="series screen">
+
+                                            </div>
+                                        </div>
+                                        <div class="app-description">
+                                            Consolidated cast information within overview section. Added release year and country to provide essential context. Overview now includes: description, released year, genre, casts, country, production.
+                                            <!-- Clear information hierarchy, consolidated data presentation, essential metadata prominence, and faster content evaluation. -->
+                                        </div>
+                                    </div>
+
+                                    <div class="impact">
+                                        Streamlined content pages, empowered users with critical data points for quicker and more confident viewing decisions.
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn">‹</button>
+                <div class="slide-indicator">
+                    <div class="indicator-dot active" data-slide="0"></div>
+                    <div class="indicator-dot" data-slide="1"></div>
+                    <div class="indicator-dot" data-slide="2"></div>
+                    <div class="indicator-dot" data-slide="3"></div>
+                </div>
+                <button class="carousel-btn" id="nextBtn">›</button>
+            </div>
+
+        </section>
+
+
+        <!-- Challenges -->
+        <section class="content-section">
+            <h2 class="section-title fade-in">Challenges That Made Me Stronger</h2>
+            <p class="section-subtitle fade-in">
+                Where every constraint became a creative opportunity
+            </p>
+            
+             <div class="challenges-split">
+                <div class="split-nav">
+                    <div class="nav-item active" onclick="showContent(0, this)">
+                        <div class="nav-title">Free Figma Hustle</div>
+                        <div class="nav-subtitle">Budget constraints</div>
+                    </div>
+                    <div class="nav-item" onclick="showContent(1, this)">
+                        <div class="nav-title">Complex Features</div>
+                        <div class="nav-subtitle">UX complexity</div>
+                    </div>
+                    <div class="nav-item" onclick="showContent(2, this)">
+                        <div class="nav-title">Evolution vs Revolution</div>
+                        <div class="nav-subtitle">Design philosophy</div>
+                    </div>
+                </div>
+                
+                <div class="split-content">
+                    <div class="content-item active">
+                        <h3 class="content-title">The Free Figma Hustle</h3>
+                        <p class="content-text">
+                            Working within free tier limitations while designing a complex streaming platform meant I had to be creative with prototyping workarounds and component management. Cause let's be real, not everyone has enterprise budgets for learning projects, so I had to work really slyly.
+                        </p>
+                        <div class="key-learning">
+                            <div class="learning-label">Key Learning</div>
+                            <div class="learning-text">Constraints breed creativity. Limited resources forced me to think more strategically about component systems and prototype efficiency.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3 class="content-title">Maintaining Complex Features</h3>
+                        <p class="content-text">
+                            Maintaining robust search and filtering while simplifying the interface was like solving a puzzle. Search, filters, and watchlists required extra UX planning within design constraints.
+                        </p>
+                        <div class="key-learning">
+                            <div class="learning-label">Key Learning</div>
+                            <div class="learning-text">Simplicity isn't about removing features – it's about making complex functionality feel effortless through thoughtful information architecture.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-item">
+                        <h3 class="content-title">Evolution vs Revolution</h3>
+                        <p class="content-text">
+                            Modernizing while preserving user familiarity was more nuanced than expected. I enhanced familiar patterns rather than replacing them, respecting user investment in the current system.
+                        </p>
+                        <div class="key-learning">
+                            <div class="learning-label">Key Learning</div>
+                            <div class="learning-text">Revolutionary results can come from evolutionary changes. Small, thoughtful improvements often have bigger impact than dramatic overhauls.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </section>
+
+
+        <!-- Key Learnings -->
+        <div class="section-header">
+            <h2 class="section-title">What This Project Taught Me</h2>
+            <p class="section-subtitle">
+                Key takeaways that demonstrate strategic thinking and readiness for UI/UX roles, born from the unique "user-as-designer" perspective.
+            </p>
+        </div>
+         
+         <!-- Hero Learning (Most Important) -->
+        <div class="hero-learning">
+            <div class="insight-category">My Superpower</div>
+            <div class="insight-title">User-as-Designer Perspective</div>
+            <div class="insight-description">
+                Living the frustrations firsthand gave me authentic insights that pure research might miss. 
+                Every pain point was personal, every solution was validated 
+                through real use, and empathy became my strongest design tool. Being both the frustrated user 
+                and the solution-focused designer created a unique feedback loop that you can't get from research alone.
+            </div>
+        </div>
+
+        <!-- Supporting Learnings -->
+        <div class="secondary-grid">
+            <div class="secondary-card">
+                <div class="insight-category">Design Philosophy</div>
+                <div class="insight-title">Less is Genuinely More</div>
+                <div class="insight-description">
+                    Breakthrough design comes from thoughtful removal rather than addition. Cutting redundancy felt risky but always made the experience better.
+                </div>
+            </div>
+
+            <div class="secondary-card">
+                <div class="insight-category">Fresh Perspective</div>
+                <div class="insight-title">Beginner's Eyes See More</div>
+                <div class="insight-description">
+                    Being new meant I questioned everything. No "that's just how it's done" bias. Turned out that's an advantage, not a weakness.
+                </div>
+            </div>
+
+            <div class="secondary-card">
+                <div class="insight-category">Process</div>
+                <div class="insight-title">Systematic Problem-Solving</div>
+                <div class="insight-description">
+                    Built my own framework: spot friction, figure out why, design fix, test it myself, iterate. Simple but it worked every time.
+
+                </div>
+            </div>
+
+            <!-- <div class="secondary-card">
+                <div class="insight-category">Confidence</div>
+                <div class="insight-title">Trusting My Instincts</div>
+                <div class="insight-description">
+                     Learned when my gut was right and when I needed to validate. That balance only comes from actually doing the work.
+
+                </div>
+            </div> -->
+
+            <div class="secondary-card">
+                <div class="insight-category">Industry Readiness</div>
+                <div class="insight-title">Good Design Isn't About Years</div>
+                <div class="insight-description">
+                    This proved I can identify real problems, think through solutions systematically, and ship work that actually improves things, regardless of experience level.
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Reflection -->
+        <div class="final-reflection">
+             <div class="reflection-text">
+                The best insights don't come from studying problems, they come from <span class="highlight">living them</span>. 
+                When you're both user and designer, every solution is personal, tested, and real.
+            </div>
+        </div>
+
+       
+    </div>
+
+    
+    <!-- Components Modal -->
+    <div class="modal-overlay" id="componentsModal">
+        <div class="modal-content">
+        <button class="modal-close" onclick="closeComponentsModal()">&times;</button>
+        <h3 class="modal-title">Complete Component Library</h3>
+        <div class="scroll-track">
+            <div class="scroll-thumb" id="scrollThumb"></div>
+        </div>
+        <div class="modal-scroll-container" id="modalScrollContainer">
+            <div class="components-grid">
+            <div class="component-card">
+                <h5>Primary Button</h5>
+                <p>Main call-to-action button with gradient background and hover effects.</p>
+                <button class="sample-button">Watch Now</button>
+            </div>
+            <div class="component-card">
+                <h5>Secondary Button</h5>
+                <p>Alternative action button with outline style for secondary actions.</p>
+                <button class="sample-button" style="background: transparent; border: 2px solid #6366f1;">Add to List</button>
+            </div>
+            <div class="component-card">
+                <h5>Movie Card</h5>
+                <p>Content card displaying movie information with poster, title, and metadata.</p>
+                <div class="sample-card">
+                <div class="sample-card-title">The Matrix</div>
+                <div class="sample-card-desc">1999 • Action, Sci-Fi • 2h 16m</div>
+                </div>
+            </div>
+            <div class="component-card">
+                <h5>Search Input</h5>
+                <p>Search field with icon and placeholder text for content discovery.</p>
+                <input type="text" placeholder="Search movies..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white;">
+            </div>
+            <div class="component-card">
+                <h5>Rating Badge</h5>
+                <p>Visual indicator for movie ratings and quality scores.</p>
+                <span style="background: linear-gradient(135deg, #ffd700, #ffed4e); color: #000; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">8.7</span>
+            </div>
+            <div class="component-card">
+                <h5>Genre Tag</h5>
+                <p>Category labels for organizing and filtering content by genre.</p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 12px; font-size: 0.75rem;">Action</span>
+                <span style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 12px; font-size: 0.75rem;">Sci-Fi</span>
+                </div>
+            </div>
+            <div class="component-card">
+                <h5>Progress Bar</h5>
+                <p>Visual indicator for video playback progress and loading states.</p>
+                <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; overflow: hidden;">
+                <div style="width: 65%; height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6);"></div>
+                </div>
+            </div>
+            <div class="component-card">
+                <h5>Navigation Tab</h5>
+                <p>Tab component for switching between different content sections.</p>
+                <div style="display: flex; gap: 16px;">
+                <span style="color: #6366f1; border-bottom: 2px solid #6366f1; padding-bottom: 4px; font-weight: 600;">Movies</span>
+                <span style="color: var(--text-secondary);">TV Shows</span>
+                </div>
+            </div>
+            <div class="component-card">
+                <h5>Quality Selector</h5>
+                <p>Dropdown component for choosing video quality options.</p>
+                <select style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: white;">
+                <option>HD 1080p</option>
+                <option>HD 720p</option>
+                <option>SD 480p</option>
+                </select>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+
+        class SolutionsCarousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = 4;
+                this.isTransitioning = false;
+                
+                this.track = document.getElementById('carouselTrack');
+                this.navButtons = document.querySelectorAll('.nav-button');
+                this.indicatorDots = document.querySelectorAll('.indicator-dot');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.navSlider = document.querySelector('.nav-slider');
+                
+                this.init();
+            }
+            
+            init() {
+                this.bindEvents();
+                // Small delay to ensure proper layout calculation
+                setTimeout(() => {
+                    this.updateNavSlider();
+                    this.updateControls();
+                }, 50);
+            }
+            
+            bindEvents() {
+                // Navigation buttons
+                this.navButtons.forEach((button, index) => {
+                    button.addEventListener('click', () => this.goToSlide(index));
+                });
+                
+                // Indicator dots
+                this.indicatorDots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+                
+                // Carousel controls
+                this.prevBtn.addEventListener('click', () => this.previousSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.previousSlide();
+                    if (e.key === 'ArrowRight') this.nextSlide();
+                });
+                
+                // Touch/swipe support
+                let startX = 0;
+                let endX = 0;
+                
+                this.track.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+                
+                this.track.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                });
+                
+                this.track.addEventListener('touchend', (e) => {
+                    endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    
+                    if (Math.abs(diffX) > 50) { // Minimum swipe distance
+                        if (diffX > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.previousSlide();
+                        }
+                    }
+                });
+                
+                // Window resize handler
+                window.addEventListener('resize', () => {
+                    this.updateNavSlider();
+                });
+            }
+            
+            goToSlide(slideIndex) {
+                if (this.isTransitioning || slideIndex === this.currentSlide) return;
+                
+                this.isTransitioning = true;
+                this.currentSlide = slideIndex;
+                
+                // Update track position
+                const translateX = -slideIndex * 25; // 25% per slide since we have 4 slides
+                this.track.style.transform = `translateX(${translateX}%)`;
+                
+                // Add transitioning class for visual feedback
+                this.track.classList.add('transitioning');
+                
+                // Update UI elements
+                this.updateNavButtons();
+                this.updateNavSlider();
+                this.updateIndicators();
+                this.updateControls();
+                
+                // Remove transitioning class after animation
+                setTimeout(() => {
+                    this.track.classList.remove('transitioning');
+                    this.isTransitioning = false;
+                }, 600);
+            }
+            
+            nextSlide() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+            
+            previousSlide() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+            
+            updateNavButtons() {
+                this.navButtons.forEach((button, index) => {
+                    button.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+            
+            updateNavSlider() {
+                const activeButton = this.navButtons[this.currentSlide];
+                const navContainer = this.navSlider.parentElement;
+                
+                if (window.innerWidth <= 768) {
+                    // Mobile: vertical layout
+                    const buttonHeight = activeButton.offsetHeight;
+                    let offsetTop = 0;
+                    
+                    // Calculate cumulative offset for vertical positioning
+                    for (let i = 0; i < this.currentSlide; i++) {
+                        offsetTop += this.navButtons[i].offsetHeight;
+                    }
+                    
+                    this.navSlider.style.transform = `translateY(${offsetTop}px)`;
+                    this.navSlider.style.width = 'calc(100% - 8px)';
+                    this.navSlider.style.height = `${buttonHeight}px`;
+                } else {
+                    // Desktop: horizontal layout
+                    const buttonWidth = activeButton.offsetWidth;
+                    let offsetLeft = 0;
+                    
+                    // Calculate cumulative offset for horizontal positioning
+                    for (let i = 0; i < this.currentSlide; i++) {
+                        offsetLeft += this.navButtons[i].offsetWidth;
+                    }
+                    
+                    this.navSlider.style.transform = `translateX(${offsetLeft}px)`;
+                    this.navSlider.style.width = `${buttonWidth}px`;
+                    this.navSlider.style.height = 'calc(100% - 12px)';
+                }
+            }
+            
+            updateIndicators() {
+                this.indicatorDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+            
+            updateControls() {
+                this.prevBtn.disabled = this.currentSlide === 0;
+                this.nextBtn.disabled = this.currentSlide === this.totalSlides - 1;
+            }
+        }
+        
+        // Modal functions
+        function openComponentsModal() {
+      document.getElementById('componentsModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(updateScrollThumb, 100);
+    }
+
+    function closeComponentsModal() {
+      document.getElementById('componentsModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('componentsModal').addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-overlay')) {
+        closeComponentsModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeComponentsModal();
+      }
+    });
+      
+
+
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = new SolutionsCarousel();
+            
+            // Add some visual enhancements
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for scroll animations
+            document.querySelectorAll('.case-slide').forEach(slide => {
+                slide.style.opacity = '0';
+                slide.style.transform = 'translateY(20px)';
+                slide.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(slide);
+            });
+        });
+
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize fade-in animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+
+            // Initialize particle system
+            particleSystem = new ParticleSystem();
+            // Initialize carousel
+            document.getElementById('next').addEventListener('click', nextSlide);
+            document.getElementById('prev').addEventListener('click', prevSlide);
+
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => goToSlide(index));
+            });
+
+            // Initialize drag handlers
+            initializeDragHandlers();
+
+            // Global mouse events
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', stopDragging);
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging || !currentHandle) return;
+                
+                const container = currentHandle.closest('.comparison-container');
+                const rect = container.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const percentage = (x / rect.width) * 100;
+                
+                updateComparison(container, percentage);
+                e.preventDefault();
+            }, { passive: false });
+            document.addEventListener('touchend', stopDragging);
+
+            // Color swatch interactions
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.addEventListener('click', function() {
+                    const color = this.style.backgroundColor;
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(color).then(() => {
+                            // Simple feedback
+                            this.style.transform = 'scale(1.2)';
+                            setTimeout(() => {
+                                this.style.transform = 'scale(1)';
+                            }, 200);
+                        });
+                    }
+                });
+            });
+
+            // Auto-advance carousel
+            setInterval(() => {
+                if (!isDragging) {
+                    nextSlide();
+                }
+            }, 6000);
+
+            // Initialize before/after toggles
+            initializeBeforeAfterToggles();
+
+            // Modal event listeners
+            document.querySelector('.close').addEventListener('click', closeComponentModal);
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('componentModal');
+                if (event.target === modal) {
+                    closeComponentModal();
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            stopDragging();
+        });
+
+        // Particle Animation System
+        class ParticleSystem {
+            constructor() {
+                this.canvas = document.getElementById('particleCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.mouse = { x: 0, y: 0 };
+                this.animationId = null;
+                
+                this.init();
+                this.setupEventListeners();
+                this.animate();
+            }
+            
+            init() {
+                this.resizeCanvas();
+                this.createParticles();
+            }
+            
+            resizeCanvas() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+            
+            createParticles() {
+                const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
+                
+                for (let i = 0; i < particleCount; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        size: Math.random() * 2 + 0.5,
+                        opacity: Math.random() * 0.3 + 0.1,
+                        color: this.getRandomColor()
+                    });
+                }
+            }
+            
+            getRandomColor() {
+                const colors = [
+                    'rgba(180, 120, 255, ',
+                    'rgba(120, 200, 255, ',
+                    'rgba(255, 255, 150, ',
+                    'rgba(150, 255, 150, '
+                ];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            setupEventListeners() {
+                window.addEventListener('resize', () => {
+                    this.resizeCanvas();
+                    this.particles = [];
+                    this.createParticles();
+                });
+                
+                document.addEventListener('mousemove', (e) => {
+                    this.mouse.x = e.clientX;
+                    this.mouse.y = e.clientY;
+                });
+            }
+            
+            updateParticles() {
+                this.particles.forEach(particle => {
+                    // Mouse interaction
+                    const dx = this.mouse.x - particle.x;
+                    const dy = this.mouse.y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        const force = (100 - distance) / 100;
+                        particle.vx += (dx / distance) * force * 0.01;
+                        particle.vy += (dy / distance) * force * 0.01;
+                    }
+                    
+                    // Update position
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // Velocity damping
+                    particle.vx *= 0.99;
+                    particle.vy *= 0.99;
+                    
+                    // Boundary collision
+                    if (particle.x < 0 || particle.x > this.canvas.width) {
+                        particle.vx *= -0.8;
+                        particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
+                    }
+                    if (particle.y < 0 || particle.y > this.canvas.height) {
+                        particle.vy *= -0.8;
+                        particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
+                    }
+                    
+                    // Add some random movement
+                    particle.vx += (Math.random() - 0.5) * 0.01;
+                    particle.vy += (Math.random() - 0.5) * 0.01;
+                });
+            }
+            
+            drawParticles() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.particles.forEach(particle => {
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = particle.color + particle.opacity + ')';
+                    this.ctx.fill();
+                    
+                    // Add glow effect
+                    this.ctx.shadowBlur = 10;
+                    this.ctx.shadowColor = particle.color + '0.5)';
+                    this.ctx.fill();
+                    this.ctx.shadowBlur = 0;
+                });
+                
+                // Draw connections between nearby particles
+                this.particles.forEach((particle, i) => {
+                    this.particles.slice(i + 1).forEach(otherParticle => {
+                        const dx = particle.x - otherParticle.x;
+                        const dy = particle.y - otherParticle.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 80) {
+                            this.ctx.beginPath();
+                            this.ctx.moveTo(particle.x, particle.y);
+                            this.ctx.lineTo(otherParticle.x, otherParticle.y);
+                            this.ctx.strokeStyle = `rgba(180, 120, 255, ${0.1 * (1 - distance / 80)})`;
+                            this.ctx.lineWidth = 0.5;
+                            this.ctx.stroke();
+                        }
+                    });
+                });
+            }
+            
+            animate() {
+                this.updateParticles();
+                this.drawParticles();
+                this.animationId = requestAnimationFrame(() => this.animate());
+            }
+            
+            destroy() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+        }
+
+        // Initialize particle system when DOM is loaded
+        let particleSystem;
+
+        // Challenges
+        function showContent(index, navItem) {
+            // Remove active from all nav items and content
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.content-item').forEach(item => item.classList.remove('active'));
+            
+            // Add active to clicked nav and corresponding content
+            navItem.classList.add('active');
+            document.querySelectorAll('.content-item')[index].classList.add('active');
+        }
+
+        // Key Learnings
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Add smooth transitions and hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to skill items
+            const skillItems = document.querySelectorAll('.skill-item');
+            skillItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(4px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+                     

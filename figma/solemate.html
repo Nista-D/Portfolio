@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Projects - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="mua.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="../index.html" class="breadcrumb-link">
+                    <span class="breadcrumb-home">
+                            <i class="fas fa-home"></i> 
+                    </span>
+                </a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <a href="../projects.html" class="breadcrumb-link">Projects</a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-link current">Solemate</span>
+            </div>
+        </nav>
+
+        <div class="project-header">
+            <h1 class="project-title">Solemate – Converse Ecommerce Landing Page</h1>
+        </div>
+
+       <div class="image-wrapper">
+            <div class="image-container" onclick="openImageModal()">
+                <img src="../figma/assets/sole.png" alt="Solemate" />
+
+            </div>
+       </div>
+
+        <div class="image-modal" id="imageModal">
+            <span class="close-btn" onclick="closeImageModal()">&times;</span>
+
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⌂</button>
+            </div>
+
+            <img src="../figma/assets/solemate.png" alt="Fragrance Expanded" class="modal-image" id="modalImage" />
+            
+            <!-- <iframe class="modal-figma" id="modalFigma" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/lWnHLQRHX8T1VbuNxnccj1/Solemate?page-id=0%3A1&node-id=16-1258&viewport=-6651%2C-1839%2C1.48&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A119&embed-host=share" allowfullscreen></iframe> -->
+
+        </div>
+
+        <div class="project-overview">
+            <div class="project-brief">
+                <h3>Project Overview</h3>
+                <p class="project-description">This is a personal challenge I gave myself, designing a clean, premium landing page just for Converse sneakers. It's more of a starter foundation than a complete shopping flow, but I wanted to see how far I could push a simple concept into something that feels conversion-friendly and well thought out.</p>
+                
+                <br>
+                <div class="highlight-section">
+                    <h4>Key Highlights</h4>
+                    <ul>
+                        <li>I kicked things off with a hero section that makes a strong first impression, backed by clear CTAs.</li>
+                        <li>The product grid is simple but functional, product cards with pricing, add-to-cart, and quick details.</li>
+                        <li>I added a trust section ("Why Choose Solemate?") because credibility is key in ecommerce.</li>
+                        <li>The testimonial section brings in social proof and builds confidence.</li>
+                        <li>I closed the flow with a footer section giving users essential links and a sense of completeness.</li>
+                        <li>Overall, I treated this as a foundation that could later grow into a real shopping experience.</li>
+                    </ul>
+                </div>
+                
+                <br><br>
+                <div class="highlight-section">
+                    <h4>Why I made this?</h4>
+                    <p class="project-description"> I've always liked the boldness of Converse branding, so I took it as a quick challenge. No research, no team, just me figuring out how to make a clean, conversion-ready sneaker page from scratch.</p>
+                </div>
+
+                <br><br>
+                <button class="expand-button" onclick="toggleExpanded()">
+                    <span>Click to find more </span>
+                    <!-- <span class="arrow">↓</span> -->
+                     <span class="arrow">
+                        <i class="fa-etch fa-solid fa-arrow-down"></i>
+                    </span>
+                </button>
+
+                <div class="expandable-content" id="expandableContent">
+                    <div class="highlight-section">
+                        <h4>If This Were a Real Shopping Experience</h4>
+                        <p class="project-description">If I continued this project, I'd:</p>
+                        <ul>
+                            <li>Build other pages included in navigation.</li>
+                            <li>Build out a proper checkout flow like cart, payment, confirmation.</li>
+                            <li>Add filter/sort tools to make browsing easier.</li>
+                            <li>Make it fully responsive for mobile-first users.</li>
+                            <li>Expand product pages with reviews, size guides, and more imagery.</li>
+                        </ul>
+                    </div>
+
+                    <br><br>
+                    <div class="highlight-section">
+                        <h4>What This Project Shows About Me</h4>
+                        <ul>
+                            <li>I can start from scratch and still create something refined without a formal brief.</li>
+                            <li>I understand how ecommerce patterns work and how to apply them.</li>
+                            <li>Even if the project isn't "perfect," I can see the bigger picture of what it needs to become.</li>
+                            <li>For me, this isn't just a polished mockup, it's proof that I can take initiative, refine details, and keep growing as a designer.</li>
+                        </ul>
+                    </div>
+
+                    <br><br>
+                    <div class="highlight-section">
+                        <h4>Side Note</h4>
+                        <p class="project-description">The goal was clarity, punch, and rhythm, nothing over-designed, just strong energy where it counts. Every section leads with purpose and personality, keeping it playful yet premium. A solid start that still has room to grow into a full ecommerce experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="dribbble-link">
+            <a href="https://dribbble.com/Lapcha" class="dribbble-btn">
+                🏀 View More on Dribbble
+            </a>
+        </div> -->
+
+        
+        <div class="related-projects">
+            <h2 class="section-title">More Figma Projects</h2>
+            
+            <div class="carousel-container">
+                <div class="projects-carousel" id="projectsCarousel">
+
+                    <div class="related-card" onclick="window.location.href='furniche.html'">
+                        <img src="../figma/assets/fur.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Furniche</h4>
+                            <p class="project-description">A Premium Furniture Ecommerce Landing Page</p>
+                        </div>
+                    </div>
+
+                    <div class="related-card" onclick="window.location.href='lakeside.html'">
+                        <img src="../figma/assets/lake.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Hotel Lakeside – Parentis-En-Born</h4>
+                            <p class="project-description">A Landing Page Redesign</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="related-card" onclick="window.location.href='solemate.html'">
+                        <img src="../figma/assets/sole.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Solemate</h4>
+                            <p class="project-description">Converse E-Commerce Landing Page</p>
+                        </div>
+                    </div> -->
+
+                    <div class="related-card" onclick="window.location.href='connect.html'">
+                        <img src="../figma/assets/connect.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Connect Dashboard</h4>
+                            <p class="project-description">Web Analytics Dashboard</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="related-card" onclick="window.location.href='artiers.html'">
+                        <img src="../figma/assets/artier.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Artiers</h4>
+                            <p class="project-description">Creative Agency Portfolio</p>
+                        </div>
+                    </div>
+
+                    <div class="related-card" onclick="window.location.href='frag.html'">
+                        <img src="../figma/assets/frag.png" alt="Figma Project">
+                        <div class="related-card-content">
+                            <h4>Frag</h4>
+                            <p class="project-description">Stardust Perfume Landing Paget</p>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+
+            <!-- <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="carousel-indicators" id="indicators"></div> -->
+
+        </div>
+
+    </div>
+
+    <!-- Mouse-shaped scroll to top button -->
+    <div class="mouse-scroll-button" onclick="scrollToTopMouse()" tabindex="0">
+        <div class="mouse-wheel"></div>
+        <div class="progress-fill"></div>
+        <div class="progress-text">0%</div>
+        <div class="tooltip">Scroll to top</div>
+    </div>
+    <div class="scroll-tag">scroll to top</div>
+
+    <script src="topper.js"></script>
+</body>
+</html>

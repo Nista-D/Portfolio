@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inkscape Projects - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="mua.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <div class="breadcrumb-item">
+                <a href="../index.html" class="breadcrumb-link">
+                    <span class="breadcrumb-home">
+                            <i class="fas fa-home"></i> 
+                    </span>
+                </a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <a href="../projects.html" class="breadcrumb-link">Projects</a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-link current">Timless Crafted Comfort</span>
+            </div>
+        </nav>
+
+        <div class="project-header">
+            <h1 class="project-title">The Timless Crafted Comfort - Armchair UI Concept</h1>
+        </div>
+
+       <div class="image-wrapper">
+            <div class="image-container" onclick="openImageModal()">
+                <img src="../inkscape/assets/furniture_70.png" alt="Furniture">
+
+            </div>
+       </div>
+
+        <div class="image-modal" id="imageModal">
+            <span class="close-btn" onclick="closeImageModal()">&times;</span>
+
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⌂</button>
+            </div>
+            <img src="../inkscape/assets/furniture_300.png" alt="Furniture Expanded" class="modal-image" id="modalImage" />
+            
+                <!-- <iframe class="modal-inkscape" id="modalFigma" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.inkscape.com/proto/lWnHLQRHX8T1VbuNxnccj1/Solemate?page-id=0%3A1&node-id=16-1258&viewport=-6651%2C-1839%2C1.48&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A119&embed-host=share" allowfullscreen></iframe> -->
+
+
+        </div>
+
+        <div class="project-overview">
+            <div class="project-brief">
+                <h3>Project Overview</h3>
+
+                <p class="project-description"> This quick concept is a clean, minimalist product hero I recreated in Inkscape to test how furniture and lifestyle brands present premium products online. It's a single-page focus section designed around one product showing how color balance, copy, and layout hierarchy work together to sell a lifestyle rather than just an item.</p>
+
+                <div class="highlight-section">
+                    <h4>Why I made this?</h4>
+                    <p class="project-description">I wanted to see if I could reproduce a high-end furniture store's look inside Inkscape — no Figma, no auto layout, just pure visual structuring. The goal was to match real-world e-commerce presentation standards: soft color transitions, confident typography, and clear product focus without clutter.</p>
+                </div> <br>
+                
+                <div class="highlight-section">
+                    <h4>What this shows about me?</h4>
+                    <ul>
+                        <li>I can design clean, market-ready product pages that balance aesthetics with usability.</li>
+                        <li>I pay attention to real product storytelling showing material quality, pricing, and lifestyle value clearly.</li>
+                        <li>I understand how e-commerce layouts build trust visually before functionally.</li>
+                        <li>I can keep visual consistency and brand tone even when replicating existing web patterns.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <button class="expand-button" onclick="toggleExpanded()">
+          <span>Click to find more</span>
+          <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span>
+        </button>
+
+        <div class="expandable-content" id="expandableContent">
+          
+            <!-- <div class="highlight-section">
+                <h4>Tool adaptation — quick notes</h4>
+                <ul>
+                 <li>Built in Inkscape — manual artboard and layer work to align food frames and text columns.</li>
+                <li>Rounded image tiles and subtle shadowing were done with shape masks and grouped exports.</li>
+                <li>Exported high-res PNGs for presentation and smaller SVGs for icons and badges.</li>
+                </ul>
+            </div> -->
+
+          <div class="highlight-section">
+            <h4>Replication & Inspiration</h4>
+            <p class="project-description">This piece is inspired from premium product interfaces like Floyd Home, Burrow, Castlery, and Article. Those websites use minimal design, generous whitespace, pastel backgrounds, and bold serif headers to highlight craftsmanship and quality. I replicated that same visual rhythm and tone to study how furniture brands make even a static chair feel aspirational.</p>
+          </div>
+
+          <br><br>
+          <div class="highlight-section">
+            <h4>Side Notes</h4>
+            <p class="project-description"> The layout looks simple but required manual alignment and color calibration to keep everything balanced. This was just a small practice to see how premium e-commerce visuals are constructed learning through imitation rather than invention.</p>
+          </div>
+
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- <div class="dribbble-link">
+        <a href="https://dribbble.com/Lapcha" class="dribbble-btn">
+                🏀 View More on Dribbble
+        </a>
+    </div> -->
+
+
+        
+        <div class="related-projects">
+            <h2 class="section-title">More Inkscape Projects</h2>
+            
+             <div class="carousel-container">
+                <div class="projects-carousel" id="projectsCarousel">
+                    
+                    <div class="related-card" onclick="window.location.href='creator.html'">
+                        <img src="../inkscape/assets/creator_40.png" alt="Inkscape Project">
+                        <div class="related-card-content">
+                            <h4>Creator Connect</h4>
+                            <p>Artist Networking Platform</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="related-card" onclick="window.location.href='furniture.html'">
+                        <img src="../inkscape/assets/furniture_40.png" alt="Inkscape Project">
+                        <div class="related-card-content">
+                            <h4>The Timeless Crafted Comfort</h4>
+                            <p>A Modern E-commerce UI Concept for Furnitures</p>
+                        </div>
+                    </div> -->
+
+                    <div class="related-card" onclick="window.location.href='forma.html'">
+                        <img src="../inkscape/assets/forma_40.png" alt="Inkscape Project">
+                        <div class="related-card-content">
+                            <h4>Forma Health</h4>
+                            <p>A Mental and Physical Wellness Platform</p>
+                        </div>
+                    </div>
+                    
+                    <div class="related-card" onclick="window.location.href='brochure.html'">
+                        <img src="../inkscape/assets/brochure_100.png" alt="Inkscape Project">
+                        <div class="related-card-content">
+                            <h4>Crimson Flame Restaurant</h4>
+                            <p>Brand Identity & Digital Furniture for Restaurant</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="related-card" onclick="window.location.href='restaurant.html'">
+                        <img src="../inkscape/assets/restaurant_40.png" alt="Inkscape Project">
+                        <div class="related-card-content">
+                            <h4>Food Delivery Platform</h4>
+                            <p>Minimalistic Restaurant Landing Page</p>
+                        </div>
+                    </div> -->
+
+                    <!-- <div class="related-card" onclick="window.location.href='player.html'">
+                        <img src="../inkscape/assets/player_40.png" alt="Inkscape Project">
+                        <div class="related-card-content">
+                            <h4>Music Player</h4>
+                            <p>Neumorphism-inspired Music App</p>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+
+            <!-- <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <div class="carousel-indicators" id="indicators"></div> -->
+
+        </div>
+    </div>
+
+    <!-- Mouse-shaped scroll to top button -->
+    <div class="mouse-scroll-button" onclick="scrollToTopMouse()" tabindex="0">
+        <div class="mouse-wheel"></div>
+        <div class="progress-fill"></div>
+        <div class="progress-text">0%</div>
+        <div class="tooltip">Scroll to top</div>
+    </div>
+
+    <div class="scroll-tag">scroll to top</div>
+
+    <script src="topper.js"></script>
+
+</body>
+
+</html>
