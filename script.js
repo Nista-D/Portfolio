@@ -213,14 +213,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Resume view functionality
-const viewResumeBtn = document.getElementById("downloadResume");
+  const viewResumeBtn = document.getElementById("downloadResume");
 
-if (viewResumeBtn) {
-  viewResumeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.open("asset/resume.pdf", "_blank"); // Update to your actual resume path
-  });
-}
+  if (viewResumeBtn) {
+    viewResumeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.open("asset/resume.pdf", "_blank"); // Update to your actual resume path
+    });
+  }
 
 
   // Expandable sections functionality
@@ -255,15 +255,23 @@ if (viewResumeBtn) {
   if (expandAboutBtn) {
     expandAboutBtn.addEventListener("click", () => {
       const aboutContent = `
-        <div class="expanded-about">
+        <div class="expanded-about" >
           I love creating interfaces that look beautiful but also make sense to real humans (shocking concept, I know). My internship was... a learning experience, let's say, but it taught me I'm pretty good at figuring things out when left to my own devices.
           I'm hoping to find a team where I can contribute some fresh perspective while learning from designers who've been around the block a few times. Because honestly, the best ideas usually come from bouncing thoughts off people who know more than you do. <br><br>
-          I'm inquisitive, a bit of a perfectionist (just a bit), and someone who genuinely cares about solving real problems through thoughtful design. While I may be early in my career, I bring fresh perspective, eagerness to learn, and the kind of dedication that turns challenges into growth opportunities.<br><br>
+          I'm inquisitive, a bit of a perfectionist (just a bit), and someone who genuinely cares about solving real problems through thoughtful design. While I may be early in my career, I bring fresh perspective, eagerness to learn, and the kind of dedication that turns challenges into growth opportunities. <br><br>
           Let's meet in person!
           <br>
-          <a href="#" class="resume-link" style="display: inline-flex; margin-top: 20px;">
-            <i class="fas fa-file-download"></i> Download Full Resume
+
+          <a 
+            href="assets/Nista_Dangol_Resume.pdf"
+            class="resume-link"
+            target="_blank"
+            rel="noopener"
+            style="display: inline-flex; margin-top: 20px;"
+          >
+            <i class="fa-solid fa-eye"></i> View Full Resume
           </a>
+
         </div>
       `
       openExpandedSection("ABOUT ME", aboutContent)

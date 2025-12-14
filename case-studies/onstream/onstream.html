@@ -51,6 +51,7 @@
             overflow-x: hidden;
         }
 
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -88,6 +89,10 @@
             color: var(--text-primary);
             font-weight: 600;
         }
+
+        /* .context-position {
+            margin-bottom: 20px!;
+        } */
 
         .context-position strong {
             /* color: var(--title);
@@ -591,7 +596,7 @@
 }
 
 
-/*---------------------- Content Sections -----------------------*/
+/*---------------------- Premise Sections -----------------------*/
         .content-section {
             padding: 40px 0;
             position: relative;
@@ -739,8 +744,36 @@
 
         }
 
-        /* Overview */
-       
+        /* Live - with higher specificity */
+        .context-narrative .premise-live {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin: 20px 0 28px;
+            opacity: 0.85;
+            transition: color 0.25s ease, opacity 0.25s ease;
+        }
+
+        .context-narrative .premise-live:hover {
+            color: var(--text-primary);
+            opacity: 1;
+        }
+
+        .context-narrative .premise-live a {
+            color: inherit;
+            font-size: 1rem !important;
+            font-weight: 400;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            cursor: pointer !important;
+            transition: opacity 0.25s ease;
+        }
+
+        .context-narrative .premise-live a:hover {
+            opacity: 0.7;
+        }
+
+
 
         /* Animations */
         @keyframes fadeInUp {
@@ -2343,6 +2376,7 @@
     <!-- Particle Animation Canvas -->
     <!-- <canvas id="particleCanvas"></canvas> -->
 
+    <!-- https://www.figma.com/proto/yXwJaJBTDKIMUN9tDMrFTZ/OnStream?page-id=0%3A1&node-id=83-1380&starting-point-node-id=83%3A1380&t=QklFeD8POVNbcYsI-1 -->
     <!-- Breadcrumb Navigation -->
     <div class="contain">
          <nav class="breadcrumb-nav" aria-label="Breadcrumb">
@@ -2393,6 +2427,7 @@
             <h1>OnStream Reimagined</h1>
             <p class="subtitle">Personal redesign project where I wore both hats – A frustrated user and a solution-focused designer.</p>
             <p class="role">THE CASE STUDY</p>
+
         </div>
 
          <!-- Quick Stats - Positioned on right edge, each card slides out individually on hover -->
@@ -2449,12 +2484,17 @@
                 <p class="context-position">
                     As a frequent user myself, I didn't need much user research as <strong>I was the user.</strong> Every confusing flow, every redundant button, every missing piece of information was a personal frustration that became a design opportunity.
                 </p>
-                        
+
                 <p class="context-approach">
                     My Philosophy: <strong>"Think like a surgeon, not a demolition expert"</strong>. Rather than completely restructuring the app, I focused on strategic improvements that enhance without overwhelming, preserving the app's character while eliminating friction.
                 </p>
-            </div>
 
+                <p class="premise-live">
+                    The work discussed here is available as a live interactive build
+                    <a href="https://www.figma.com/proto/yXwJaJBTDKIMUN9tDMrFTZ/OnStream?page-id=0%3A1&node-id=83-1380&starting-point-node-id=83%3A1380&t=QklFeD8POVNbcYsI-1" target="_blank" rel="noopener">↗</a>
+                </p>
+
+            </div>
         </section>
 
             

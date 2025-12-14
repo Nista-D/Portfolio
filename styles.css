@@ -23,6 +23,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  caret-color: transparent;
 }
 
 html,
@@ -191,8 +192,14 @@ body {
   padding: 16px;
 }
 
+.name-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .animated-name {
-  font-size: 2.5rem; /* Reverted to original size */
+  font-size: 2.2rem;
   font-weight: 700;
   background-clip: text;
   -webkit-background-clip: text;
@@ -200,6 +207,28 @@ body {
   background-image: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00, #ffff00);
   background-size: 300% 100%;
   animation: gradient-animation 5s ease infinite;
+}
+
+.designer-tag-tech {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    color: #ffcb76;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: text-flicker 3s ease-in-out infinite;
+}
+
+.designer-tag-tech::before {
+    content: '< ';
+    color: #ff63b6;
+    animation: bracket-pulse 2s ease-in-out infinite;
+}
+
+.designer-tag-tech::after {
+    content: ' />';
+    color: #ff00ff;
+    animation: bracket-pulse 2s ease-in-out infinite;
 }
 
 @keyframes gradient-animation {
@@ -214,18 +243,39 @@ body {
   }
 }
 
-/* About Section - Taller */
+@keyframes text-flicker {
+    0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 5px #00ff00;
+    }
+    50% {
+        opacity: 0.95;
+        text-shadow: 0 0 8px #00ff00, 0 0 12px #00ff00;
+    }
+}
+
+@keyframes bracket-pulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 8px #ff00ff;
+    }
+}
+
+/* About Section  */
 .about {
   grid-area: about;
   display: flex;
   flex-direction: column;
-  height: 230px;
-  max-height: 240px; /* Increased height */
-  padding: 20px; /* Restored original padding */
+  height: 220px;
+  max-height: 240px;
+  padding: 20px; 
 }
 
 .about .section-header {
-  margin-bottom: 10px; /* Restored original margin */
+  margin-bottom: 10px; 
 }
 
 .about p {
@@ -252,13 +302,13 @@ body {
   transform: translateY(-2px);
 }
 
-/* Contact Section - Smaller height */
+/* Contact Section*/
 .contact {
   grid-area: contact;
   display: flex;
   flex-direction: column;
-  height: 220px;
-  max-height: 500px;
+  height: 200px;
+  max-height: 400px;
 }
 
 .email-display {
@@ -294,8 +344,8 @@ body {
   /* display: grid; */
   /* grid-template-columns: repeat(2, 1fr); */
   gap: 10px;
-  margin-top: auto;
-  margin-bottom: 16px;
+  margin-top: 8px;
+  /* margin-bottom: 2px; */
 }
 
 .social-icon {
@@ -327,20 +377,21 @@ body {
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 2px;
+  gap: 50px;
   margin-top: 10px;
 }
 
 .tool {
   background-color: var(--card-bg);
   border-radius: 8px;
-  width: 100px;
-  padding: 7px;
+  width: 120px;
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: var(--transition);
 }
+
 .tool-logo-fig {
     width: 24px;
     height: 24px;
@@ -372,7 +423,7 @@ body {
 .tool-name{
   color: #0a0a0a;
   font-size: 12px;
-  margin-left: 4px;
+  margin-left: 8px;
   filter: invert(100%);
 }
 .tool:hover {
@@ -387,7 +438,7 @@ body {
 }
 
 .mockups-carousel {
-  height: calc(100% - 25px);
+  height: calc(100% - 10px);
   overflow: hidden;
   position: relative;
   margin-top: 10px;
@@ -479,48 +530,6 @@ body {
   }
 }
 
-/* .project {
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.05);
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 10px 0;
-}
-
-.project:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.project img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition);
-}
-
-.project:hover img {
-  transform: scale(1.05);
-}
-
-.project-info {
-  padding: 10px;
-}
-
-.project-info h3 {
-  margin-top: 6px;
-  margin-bottom: 6px;
-  font-size: 0.9rem;
-  font-family: "Orbitron", sans-serif;
-}
-
-.project-info p {
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-} */
-
 .project {
   border-radius: 10px;
   overflow: hidden;
@@ -528,9 +537,9 @@ body {
   transition: var(--transition);
   display: flex;
   flex-direction: column;
-  padding: 0; /* Remove bottom padding since overlay will handle spacing */
-  position: relative; /* ADD THIS */
-  min-height: 250px; /* ADD THIS - ensures consistent height */
+  padding: 0; 
+  position: relative;
+  min-height: 250px; 
 }
 
 .project-info {
@@ -568,7 +577,7 @@ body {
   height: 100%;
   object-fit: cover;
   transition: var(--transition);
-  position: absolute; /* ADD THIS */
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
@@ -642,7 +651,7 @@ a:visited{
 }
 
 .expanded-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
@@ -672,6 +681,9 @@ a:visited{
   max-height: calc(80vh - 80px);
   overflow-y: auto;
   padding-right: 10px;
+  font-size: 16px;
+  color: #dddddd;
+  line-height: 30px;
 }
 
 /* Hide scrollbar but allow scrolling */

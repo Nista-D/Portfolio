@@ -36,6 +36,14 @@
                 radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.05) 0%, transparent 30%);
         }
 
+        a{
+            color:#eeeeee;
+        }
+
+        a:visited {
+            color: #bbbbbb;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -144,6 +152,7 @@
             border: 1px solid rgba(255,255,255,0.1);
             cursor: pointer;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .image-container:hover {
@@ -256,6 +265,64 @@
             border-radius: 12px;
         }
 
+        .click-instruction {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            letter-spacing: 0.6px;
+            /* text-transform: uppercase; */
+            opacity: 0.8;
+            border: none;
+            z-index: 2;
+            pointer-events: none; /* important: not clickable */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+
+        .image-cta {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 10px;
+            opacity: 0.85;
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+
+        .image-cta i {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .image-container:hover .click-instruction {
+            opacity: 0.45;
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .image-container:hover .image-cta {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.75);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
 
         .project-details {
             margin-bottom: 3rem;
