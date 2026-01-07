@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <br>
 
           <a 
-            href="assets/Nista_Dangol_Resume.pdf"
+            href="assets/NistaDangol_Resume.pdf"
             class="resume-link"
             target="_blank"
             rel="noopener"
