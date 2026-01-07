@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (viewResumeBtn) {
     viewResumeBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      window.open("asset/resume.pdf", "_blank"); // Update to your actual resume path
+      window.open("assets/NistaDangol_Resume.pdf", "_blank"); // Update to your actual resume path
     });
   }
 
