@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
             rel="noopener"
             style="display: inline-flex; margin-top: 20px;"
           >
-            <i class="fa-solid fa-eye"></i> View Full Resume
+            <i class="fa-solid fa-eye"></i> View Resume
           </a>
 
         </div>
